@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/xininn.ico" />
+    <title>赞助支持</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f3f4f6;
+            min-height: 100vh;
+            color: #0f172a;
+            padding: 20px 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 28px 40px 24px;
+            box-shadow: 0 18px 55px rgba(15, 23, 42, 0.12);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .page-card::before {
+            content: "";
+            position: absolute;
+            inset: -80px -80px auto auto;
+            background: radial-gradient(circle at 100% 0, rgba(255, 29, 85, 0.12), transparent 60%);
+            opacity: 1;
+            pointer-events: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: rgba(255, 29, 85, 0.08);
+            backdrop-filter: blur(8px);
+            padding: 12px 25px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 29, 85, 0.15);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 10px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container svg {
+            width: 20px;
+            height: 20px;
+            fill: #ff1d55;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+            margin-left: auto;
+        }
+
+        .nav-menu a {
+            color: #0f172a;
+            text-decoration: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 29, 85, 0.1);
+            color: #ff1d55;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #ff1d55;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover::after {
+            width: 80%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: row;
+                padding: 10px 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .nav-menu {
+                margin-left: 0;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .page-card {
+                padding: 20px 16px;
+                border-radius: 16px;
+            }
+
+            body {
+                padding-bottom: 60px;
+            }
+        }
+
+        .sponsor-content {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sponsor-title {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ff1d55, #ff7a95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sponsor-description {
+            font-size: 1.2em;
+            margin-bottom: 50px;
+            color: #6b7280;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            perspective: 1000px;
+        }
+
+        .payment-method {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            width: 320px;
+            transition: all 0.5s ease;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .payment-method:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 29, 85, 0.15);
+            border-color: rgba(255, 29, 85, 0.3);
+        }
+
+        .payment-method h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .qr-code {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto;
+            background: #f9fafb;
+            padding: 10px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .thank-you {
+            margin-top: 50px;
+            font-size: 1.2em;
+            color: #6b7280;
+        }
+
+        .sponsor-list {
+            margin-top: 60px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .sponsor-list h2 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: #0f172a;
+        }
+
+        .sponsor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .sponsor-table th,
+        .sponsor-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .sponsor-table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .sponsor-table tr:hover {
+            background: rgba(255, 29, 85, 0.05);
+        }
+
+        .sponsor-table td {
+            color: #6b7280;
+        }
+
+        .amount {
+            color: #ff1d55;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .payment-methods {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .payment-method {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .sponsor-title {
+                font-size: 2.2em;
+            }
+
+            .sponsor-description {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+
+            .sponsor-list {
+                padding: 20px 15px;
+                margin-top: 40px;
+            }
+
+            .sponsor-table {
+                display: block;
+                background: none;
+                border-radius: 0;
+            }
+
+            .sponsor-table thead {
+                display: none;
+            }
+
+            .sponsor-table tbody tr {
+                display: block;
+                padding: 15px;
+                border-radius: 12px;
+                margin-bottom: 12px;
+                background: #f9fafb;
+                border: 1px solid #e5e7eb;
+            }
+
+            .sponsor-table td {
+                display: flex;
+                padding: 8px 0;
+                border: none;
+                align-items: center;
+            }
+
+            .sponsor-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                width: 80px;
+                min-width: 80px;
+                color: #0f172a;
+            }
+
+            .sponsor-table tr:hover {
+                background: rgba(255, 29, 85, 0.05);
+                transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sponsor-title {
+                font-size: 1.8em;
+            }
+
+            .payment-method {
+                padding: 20px;
+            }
+
+            .qr-code {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* 添加炫酷动画效果 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .payment-method {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .payment-method:nth-child(2) {
+            animation-delay: -3s;
+        }
+
+        /* 移动端底部导航 */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            height: 60px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-bottom-nav {
+                display: grid;
+            }
+            body {
+                padding-bottom: 60px;
+            }
+        }
+
+        .mobile-bottom-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-bottom-nav a:hover {
+            color: #4f46e5;
+            background: #f9fafb;
+        }
+
+        .mobile-bottom-nav a.active {
+            color: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-links">
+            <div class="logo-container">
+                <span>支持壹零</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html">首页</a>
+                <a href="qiantai.html">前台</a>
+                <a href="naver.html">导航</a>
+                <a href="about.html" class="active">搬砖</a>
+            </div>
+        </nav>
+
+        <div class="page-card">
+            <div class="sponsor-content">
+                <h1 class="sponsor-title">支持我们</h1>
+                <p class="sponsor-description">
+                    您的每一份支持都是我们前进的动力<br>
+                    一起来创造更多精彩内容
+                </p>
+
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <h3>微信支付</h3>
+                    <div class="qr-code">
+                        <img src="../img/weixin.png" alt="微信收款码">
+                    </div>
+                </div>
+
+                <div class="payment-method">
+                    <h3>支付宝</h3>
+                    <div class="qr-code">
+                        <img src="../img/zhifubao.png" alt="支付宝收款码">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sponsor-list">
+                <h2>赞助者名单</h2>
+                <table class="sponsor-table">
+                    <thead>
+                        <tr>
+                            <th>支持者</th>
+                            <th>金额</th>
+                            <th>时间</th>
+                            <th>留言</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="支持者">Y*N</td>
+                            <td data-label="金额" class="amount">¥10.00</td>
+                            <td data-label="时间">2025-04-15</td>
+                            <td data-label="留言">小小意思，支持一下。加油！</td>
+                        </tr>
+                        <tr>
+                            <td data-label="支持者">**琛</td>
+                            <td data-label="金额" class="amount">¥10.00</td>
+                            <td data-label="时间">2025-04-13</td>
+                            <td data-label="留言">加油！奥利给！</td>
+                        </tr>
+                        <tr>
+                            <td data-label="支持者">张*治</td>
+                            <td data-label="金额" class="amount">¥100.00</td>
+                            <td data-label="时间">2025-01-15</td>
+                            <td data-label="留言">加油！继续创作！</td>
+                        </tr>
+                        <tr>
+                            <td data-label="支持者">李*</td>
+                            <td data-label="金额" class="amount">¥20.00</td>
+                            <td data-label="时间">2025-01-14</td>
+                            <td data-label="留言">内容很棒</td>
+                        </tr>
+                        <tr>
+                            <td data-label="支持者">王**</td>
+                            <td data-label="金额" class="amount">¥30.00</td>
+                            <td data-label="时间">2025-01-13</td>
+                            <td data-label="留言">支持一下，继续加油</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="thank-you">✨ 感谢您的支持，让我们一起成长 ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 移动端底部导航 -->
+    <nav class="mobile-bottom-nav" role="navigation" aria-label="移动端导航">
+        <a href="index.html">首页</a>
+        <a href="naver.html">导航</a>
+        <a href="qiantai.html">前台</a>
+        <a href="about.html" class="active">搬砖</a>
+    </nav>
+
+</body>
+</html>
