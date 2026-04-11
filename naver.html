@@ -137,8 +137,8 @@
         </nav>
     </header>
 
-    <!-- 搜索区域 -->
-    <div class="w-full bg-white dark:bg-[#020617] pt-8 pb-6 px-4 text-center" role="search">
+    <!-- 搜索区域 (仅桌面端显示) -->
+    <div class="hidden md:block w-full bg-white dark:bg-[#020617] pt-8 pb-6 px-4 text-center" role="search">
         <h1 class="text-3xl md:text-4xl font-black mb-4 tracking-tight text-slate-900 dark:text-white">
             <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400">壹号导航</span>
         </h1>
@@ -147,7 +147,7 @@
             <label for="search-input" class="sr-only">搜索分类或链接</label>
             <div class="relative">
                 <input type="text" id="search-input" placeholder="输入关键字搜索分类或链接... (按 / 聚焦)"
-                       class="w-full pl-12 pr-24 py-3 bg-slate-100 dark:bg-slate-800/50 border-2 border-transparent focus:border-primary-500 focus:bg-white dark:focus:bg-slate-800 rounded-xl outline-none transition-all text-sm text-slate-900 dark:text-white placeholder-slate-400 shadow-lg hover:shadow-xl font-bold"
+                       class="search-input w-full pl-12 pr-24 py-3 bg-slate-100 dark:bg-slate-800/50 border-2 border-transparent focus:border-primary-500 focus:bg-white dark:focus:bg-slate-800 rounded-xl outline-none transition-all text-sm text-slate-900 dark:text-white placeholder-slate-400 shadow-lg hover:shadow-xl font-bold"
                        autocomplete="off"
                        aria-label="搜索分类或链接">
                 <!-- 搜索图标 -->
@@ -171,13 +171,27 @@
         </div>
     </div>
 
-    <!-- 移动端顶部状态栏 -->
-    <div class="md:hidden sticky top-0 z-40 w-full bg-white/95 dark:bg-[#020617]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-4 flex justify-between items-center shadow-sm" role="banner">
-        <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">壹号导航</h1>
-        <button onclick="App.toggleMobileMenu()" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold shadow-lg shadow-primary-600/20 transition-colors" aria-label="打开全部分类菜单" aria-expanded="false">
-            全部分类
-        </button>
-    </div>
+    <!-- 移动端顶部导航 (包含搜索，置顶) -->
+    <header class="md:hidden sticky top-0 z-50 w-full bg-white/95 dark:bg-[#020617]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm" role="banner">
+        <div class="flex items-center justify-between px-4 py-2">
+            <h1 class="text-lg font-black tracking-tight text-slate-900 dark:text-white">壹号导航</h1>
+            <button onclick="App.toggleMobileMenu()" class="px-3 py-1.5 rounded-lg bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold shadow-lg shadow-primary-600/20 transition-colors" aria-label="全部分类">
+                全部分类
+            </button>
+        </div>
+        <div class="px-3 pb-2.5">
+            <div class="relative">
+                <input type="text" id="search-input-mobile" placeholder="搜索ing..."
+                       class="search-input w-full pl-8 pr-3 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-primary-500 rounded-lg outline-none transition-all text-sm text-slate-900 dark:text-white placeholder-slate-400"
+                       autocomplete="off" aria-label="搜索">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <!-- 主体内容 (1-60 分类区块) -->
     <main id="main-content" class="flex-grow w-full px-4 md:px-8 py-10 mb-32 md:mb-48" role="main" aria-label="导航分类">
@@ -740,14 +754,17 @@
             const SearchManager = {
                 debounceTimer: null,
                 clearBtn: null,
+                inputs: [],
 
                 init() {
-                    const input = DOM.$('#search-input');
+                    this.inputs = Array.from(DOM.$$('.search-input'));
                     this.clearBtn = DOM.$('#clear-search');
-                    if (!input) return;
+                    if (!this.inputs.length) return;
 
                     // 输入事件
-                    input.addEventListener('input', (e) => this.handleInput(e));
+                    this.inputs.forEach(input => {
+                        input.addEventListener('input', (e) => this.handleInput(e));
+                    });
                     
                     // 清空按钮
                     if (this.clearBtn) {
@@ -756,17 +773,25 @@
                     
                     // 键盘快捷键
                     document.addEventListener('keydown', (e) => {
-                        // 按 / 聚焦搜索框
-                        if (e.key === '/' && document.activeElement !== input) {
-                            e.preventDefault();
-                            input.focus();
+                        // 按 / 聚焦搜索框 (优先聚焦可见的)
+                        if (e.key === '/') {
+                            const visibleInput = this.inputs.find(i => i.offsetParent !== null) || this.inputs[0];
+                            if (document.activeElement !== visibleInput) {
+                                e.preventDefault();
+                                visibleInput.focus();
+                            }
                         }
                         // 按 Escape 清空并失焦
-                        if (e.key === 'Escape' && document.activeElement === input) {
-                            if (input.value) {
-                                this.clearSearch();
-                            } else {
-                                input.blur();
+                        if (e.key === 'Escape') {
+                            const activeInput = document.activeElement;
+                            if (this.inputs.includes(activeInput)) {
+                                if (activeInput.value) {
+                                    activeInput.value = '';
+                                    this.performSearch('');
+                                    this.updateClearBtn();
+                                } else {
+                                    activeInput.blur();
+                                }
                             }
                         }
                     });
@@ -785,11 +810,20 @@
                 },
 
                 clearSearch() {
-                    const input = DOM.$('#search-input');
-                    input.value = '';
+                    this.inputs.forEach(input => {
+                        input.value = '';
+                    });
                     this.updateClearBtn();
                     this.performSearch('');
-                    input.focus();
+                    const visibleInput = this.inputs.find(i => i.offsetParent !== null) || this.inputs[0];
+                    if (visibleInput) visibleInput.focus();
+                },
+
+                updateClearBtn() {
+                    if (!this.clearBtn) return;
+                    const visibleInput = this.inputs.find(i => i.offsetParent !== null) || this.inputs[0];
+                    const hasValue = visibleInput && visibleInput.value.length > 0;
+                    this.clearBtn.classList.toggle('hidden', !hasValue);
                 },
 
                 performSearch(keyword) {
