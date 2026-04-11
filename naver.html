@@ -182,13 +182,18 @@
         <div class="px-3 pb-2.5">
             <div class="relative">
                 <input type="text" id="search-input-mobile" placeholder="搜索ing..."
-                       class="search-input w-full pl-8 pr-3 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-primary-500 rounded-lg outline-none transition-all text-sm text-slate-900 dark:text-white placeholder-slate-400"
+                       class="search-input w-full pl-8 pr-8 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-primary-500 rounded-lg outline-none transition-all text-sm text-slate-900 dark:text-white placeholder-slate-400"
                        autocomplete="off" aria-label="搜索">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
+                <button id="clear-search-mobile" class="absolute inset-y-0 right-0 flex items-center pr-2 hidden text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" aria-label="清空搜索">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
@@ -766,10 +771,11 @@
                         input.addEventListener('input', (e) => this.handleInput(e));
                     });
                     
-                    // 清空按钮
-                    if (this.clearBtn) {
-                        this.clearBtn.addEventListener('click', () => this.clearSearch());
-                    }
+                    // 清空按钮 (桌面端 + 移动端)
+                    const clearBtns = [this.clearBtn, DOM.$('#clear-search-mobile')].filter(Boolean);
+                    clearBtns.forEach(btn => {
+                        btn.addEventListener('click', () => this.clearSearch());
+                    });
                     
                     // 键盘快捷键
                     document.addEventListener('keydown', (e) => {
@@ -820,10 +826,10 @@
                 },
 
                 updateClearBtn() {
-                    if (!this.clearBtn) return;
+                    const clearBtns = [this.clearBtn, DOM.$('#clear-search-mobile')].filter(Boolean);
                     const visibleInput = this.inputs.find(i => i.offsetParent !== null) || this.inputs[0];
                     const hasValue = visibleInput && visibleInput.value.length > 0;
-                    this.clearBtn.classList.toggle('hidden', !hasValue);
+                    clearBtns.forEach(btn => btn.classList.toggle('hidden', !hasValue));
                 },
 
                 performSearch(keyword) {
