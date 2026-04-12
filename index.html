@@ -371,6 +371,31 @@
                 gap: 1rem;
             }
 
+            /* 移动端导航卡片改为横向布局 */
+            .nav-card {
+                flex-direction: row !important;
+                align-items: center;
+                gap: 1rem;
+                padding: 1.25rem;
+            }
+
+            .nav-card-icon {
+                margin: 0;
+                width: 48px;
+                height: 48px;
+                flex-shrink: 0;
+            }
+
+            .nav-card-content {
+                text-align: left;
+                flex: 1;
+            }
+            
+            /* 移动端隐藏箭头，保持简洁 */
+            .nav-card-arrow {
+                display: none;
+            }
+
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
