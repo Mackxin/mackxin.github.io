@@ -1,362 +1,414 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../img/xininn.ico" />
-    <title>赞助支持</title>
+    <link rel="shortcut icon" href="img/xininn.ico" />
+    <title>支持我们 - 壹号栈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #ff1d55;
+            --primary-light: #ff7a95;
+            --primary-dark: #e61045;
+            --primary-bg: #fff1f5;
+            --bg: #fafafa;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --radius: 20px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #f3f4f6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             min-height: 100vh;
-            color: #0f172a;
-            padding: 20px 0;
             line-height: 1.6;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .page-card {
-            background: #ffffff;
-            border-radius: 22px;
-            padding: 28px 40px 24px;
-            box-shadow: 0 18px 55px rgba(15, 23, 42, 0.12);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .page-card::before {
-            content: "";
-            position: absolute;
-            inset: -80px -80px auto auto;
-            background: radial-gradient(circle at 100% 0, rgba(255, 29, 85, 0.12), transparent 60%);
-            opacity: 1;
+        /* 背景装饰 */
+        .bg-decoration {
+            position: fixed;
+            inset: 0;
             pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .nav-links {
-            display: flex;
+        .bg-decoration::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 29, 85, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bg-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 122, 149, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 5rem;
+        }
+
+        /* 头部标题 */
+        .page-header {
+            text-align: center;
+            padding: 3rem 0 4rem;
+        }
+
+        .page-header-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 30px;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
             background: rgba(255, 29, 85, 0.08);
-            backdrop-filter: blur(8px);
-            padding: 12px 25px;
-            border-radius: 16px;
-            margin-bottom: 30px;
+            color: var(--primary);
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
             border: 1px solid rgba(255, 29, 85, 0.15);
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 5px 10px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+        .page-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
-        .logo-container svg {
-            width: 20px;
-            height: 20px;
-            fill: #ff1d55;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 5px;
-            margin-left: auto;
-        }
-
-        .nav-menu a {
-            color: #0f172a;
-            text-decoration: none;
-            padding: 8px 16px;
-            font-size: 14px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-menu a:hover {
-            background: rgba(255, 29, 85, 0.1);
-            color: #ff1d55;
-            transform: translateY(-2px);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: #ff1d55;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-menu a:hover::after {
-            width: 80%;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: row;
-                padding: 10px 15px;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .nav-menu {
-                margin-left: 0;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .page-card {
-                padding: 20px 16px;
-                border-radius: 16px;
-            }
-
-            body {
-                padding-bottom: 60px;
-            }
-        }
-
-        .sponsor-content {
-            text-align: center;
-            padding: 40px 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .sponsor-title {
-            font-size: 3.5em;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ff1d55, #ff7a95);
+        .page-title span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .sponsor-description {
-            font-size: 1.2em;
-            margin-bottom: 50px;
-            color: #6b7280;
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .payment-methods {
+        /* 区块通用样式 */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
             display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 40px;
-            perspective: 1000px;
+            font-size: 1.25rem;
+            flex-shrink: 0;
         }
 
-        .payment-method {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 20px;
-            width: 320px;
-            transition: all 0.5s ease;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        .section-title {
+            font-size: 1.375rem;
+            font-weight: 800;
         }
 
-        .payment-method:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 29, 85, 0.15);
+        /* 收款码卡片 */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .payment-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
             border-color: rgba(255, 29, 85, 0.3);
         }
 
-        .payment-method h3 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: #0f172a;
+        .payment-card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
 
-        .qr-code {
-            width: 220px;
-            height: 220px;
+        .payment-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .qr-wrapper {
+            width: 200px;
+            height: 200px;
             margin: 0 auto;
-            background: #fff1f5;
-            padding: 10px;
-            border-radius: 15px;
-            border: 1px solid #e5e7eb;
+            background: var(--primary-bg);
+            border-radius: 16px;
+            padding: 12px;
+            border: 2px dashed rgba(255, 29, 85, 0.2);
         }
 
-        .qr-code img {
+        .qr-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
-        .thank-you {
-            margin-top: 50px;
-            font-size: 1.2em;
-            color: #6b7280;
-        }
-
-        .sponsor-list {
-            margin-top: 60px;
-            padding: 30px;
-            background: #ffffff;
-            border-radius: 20px;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-        }
-
-        .sponsor-list h2 {
-            font-size: 1.8em;
-            margin-bottom: 25px;
-            color: #0f172a;
-        }
-
-        .sponsor-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 15px;
+        /* 赞助者表格 */
+        .sponsors-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
             overflow: hidden;
         }
 
-        .sponsor-table th,
-        .sponsor-table td {
-            padding: 15px;
+        .sponsors-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sponsors-table th {
             text-align: left;
-            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            background: #f8fafc;
+            border-bottom: 2px solid var(--border);
         }
 
-        .sponsor-table th {
-            background: #fff1f5;
+        .sponsors-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .sponsors-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .sponsors-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .sponsors-table tbody tr:hover {
+            background: var(--primary-bg);
+        }
+
+        .sponsor-amount {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .sponsor-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 0.75rem;
+            vertical-align: middle;
+        }
+
+        /* 更新记录时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-light), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--card-bg);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-item:first-child .timeline-dot {
+            background: var(--primary-dark);
+            box-shadow: 0 0 0 2px var(--primary-dark), 0 0 0 5px rgba(255, 29, 85, 0.2);
+        }
+
+        .timeline-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            box-shadow: var(--shadow);
+            border-color: rgba(255, 29, 85, 0.2);
+        }
+
+        .timeline-date {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
             font-weight: 600;
-            color: #0f172a;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .sponsor-table tr:hover {
-            background: rgba(255, 29, 85, 0.05);
-        }
-
-        .sponsor-table td {
-            color: #6b7280;
-        }
-
-        .amount {
-            color: #ff1d55;
+        .timeline-badge {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            background: var(--primary-bg);
+            color: var(--primary);
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
-        @media (max-width: 768px) {
-            .payment-methods {
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
-            }
+        .timeline-badge.feature { background: #dbeafe; color: #2563eb; }
+        .timeline-badge.fix { background: #dcfce7; color: #16a34a; }
+        .timeline-badge.update { background: var(--primary-bg); color: var(--primary); }
 
-            .payment-method {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .sponsor-title {
-                font-size: 2.2em;
-            }
-
-            .sponsor-description {
-                font-size: 1em;
-                margin-bottom: 30px;
-            }
-
-            .sponsor-list {
-                padding: 20px 15px;
-                margin-top: 40px;
-            }
-
-            .sponsor-table {
-                display: block;
-                background: none;
-                border-radius: 0;
-            }
-
-            .sponsor-table thead {
-                display: none;
-            }
-
-            .sponsor-table tbody tr {
-                display: block;
-                padding: 15px;
-                border-radius: 12px;
-                margin-bottom: 12px;
-                background: #fff1f5;
-                border: 1px solid #e5e7eb;
-            }
-
-            .sponsor-table td {
-                display: flex;
-                padding: 8px 0;
-                border: none;
-                align-items: center;
-            }
-
-            .sponsor-table td::before {
-                content: attr(data-label);
-                font-weight: 600;
-                width: 80px;
-                min-width: 80px;
-                color: #0f172a;
-            }
-
-            .sponsor-table tr:hover {
-                background: rgba(255, 29, 85, 0.05);
-                transform: none;
-            }
+        .timeline-title {
+            font-size: 1.0625rem;
+            font-weight: 700;
+            margin-bottom: 0.375rem;
         }
 
-        @media (max-width: 480px) {
-            .sponsor-title {
-                font-size: 1.8em;
-            }
-
-            .payment-method {
-                padding: 20px;
-            }
-
-            .qr-code {
-                width: 200px;
-                height: 200px;
-            }
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
         }
 
-        /* 添加炫酷动画效果 */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .timeline-list {
+            list-style: none;
+            margin-top: 0.75rem;
         }
 
-        .payment-method {
-            animation: float 6s ease-in-out infinite;
+        .timeline-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 0.25rem;
         }
 
-        .payment-method:nth-child(2) {
-            animation-delay: -3s;
+        .timeline-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* 感谢语 */
+        .thank-you {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #fdf2f8 100%);
+            border-radius: var(--radius);
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 29, 85, 0.1);
+        }
+
+        .thank-you-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .thank-you h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .thank-you p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
         }
 
         /* 移动端底部导航 */
@@ -370,17 +422,19 @@
             border-top: 1px solid #e5e7eb;
             display: none;
             grid-template-columns: repeat(4, 1fr);
-            height: 40px;
+            height: 60px;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
         }
 
         @media (max-width: 768px) {
-            .mobile-bottom-nav {
-                display: grid;
-            }
-            body {
-                padding-bottom: 40px;
-            }
+            .mobile-bottom-nav { display: grid; }
+            body { padding-bottom: 60px; }
+            .container { padding: 1rem 1rem 4rem; }
+            .page-header { padding: 2rem 0 3rem; }
+            .payment-grid { grid-template-columns: 1fr; }
+            .sponsors-table { font-size: 0.8125rem; }
+            .sponsors-table th,
+            .sponsors-table td { padding: 0.75rem 0.5rem; }
         }
 
         .mobile-bottom-nav a {
@@ -394,102 +448,220 @@
             transition: all 0.2s ease;
         }
 
-        .mobile-bottom-nav a:hover {
-            color: #ff1d55;
-            background: #fff1f5;
+        .mobile-bottom-nav a:hover { color: var(--primary); background: var(--primary-bg); }
+        .mobile-bottom-nav a.active { color: var(--primary); }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .mobile-bottom-nav a.active {
-            color: #ff1d55;
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
         }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
+    <div class="bg-decoration"></div>
+    
     <div class="container">
-        <nav class="nav-links">
-            <div class="logo-container">
-                <span>支持壹零</span>
+        <!-- 页面标题 -->
+        <header class="page-header animate-in">
+            <div class="page-header-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                支持我们
             </div>
-            <div class="nav-menu">
-                <a href="index.html" data-page="index.html">首页</a>
-                <a href="qiantai.html" data-page="qiantai.html">前台</a>
-                <a href="naver.html" data-page="naver.html">导航</a>
-                <a href="about.html" class="active" data-page="about.html">搬砖</a>
+            <h1 class="page-title">每一份支持都是 <span>前行的动力</span></h1>
+            <p class="page-subtitle">您的慷慨赞助让我们能够持续创作优质内容，探索更多可能。所有资金将用于服务器维护与内容开发。</p>
+        </header>
+
+        <!-- 收款方式 -->
+        <section class="section animate-in delay-1">
+            <div class="section-header">
+                <div class="section-icon">💳</div>
+                <h2 class="section-title">支持方式</h2>
             </div>
-        </nav>
-
-        <div class="page-card">
-            <div class="sponsor-content">
-                <h1 class="sponsor-title">支持我们</h1>
-                <p class="sponsor-description">
-                    您的每一份支持都是我们前进的动力<br>
-                    一起来创造更多精彩内容
-                </p>
-
-            <div class="payment-methods">
-                <div class="payment-method">
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <div class="payment-card-icon">💚</div>
                     <h3>微信支付</h3>
-                    <div class="qr-code">
-                        <img src="../img/weixin.png" alt="微信收款码">
+                    <div class="qr-wrapper">
+                        <img src="img/weixin.png" alt="微信收款码">
                     </div>
                 </div>
-
-                <div class="payment-method">
+                <div class="payment-card">
+                    <div class="payment-card-icon">💙</div>
                     <h3>支付宝</h3>
-                    <div class="qr-code">
-                        <img src="../img/zhifubao.png" alt="支付宝收款码">
+                    <div class="qr-wrapper">
+                        <img src="img/zhifubao.png" alt="支付宝收款码">
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="sponsor-list">
-                <h2>赞助者名单</h2>
-                <table class="sponsor-table">
+        <!-- 赞助者名单 -->
+        <section class="section animate-in delay-2">
+            <div class="section-header">
+                <div class="section-icon">🏆</div>
+                <h2 class="section-title">赞助者荣誉榜</h2>
+            </div>
+            <div class="sponsors-card">
+                <table class="sponsors-table">
                     <thead>
                         <tr>
                             <th>支持者</th>
                             <th>金额</th>
                             <th>时间</th>
-                            <th>留言</th>
+                            <th>暖心留言</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-label="支持者">Y*N</td>
-                            <td data-label="金额" class="amount">¥10.00</td>
-                            <td data-label="时间">2025-04-15</td>
-                            <td data-label="留言">小小意思，支持一下。加油！</td>
+                            <td><span class="sponsor-avatar">Y</span>Y*N</td>
+                            <td class="sponsor-amount">¥10.00</td>
+                            <td>2025-04-15</td>
+                            <td>小小意思，支持一下。加油！</td>
                         </tr>
                         <tr>
-                            <td data-label="支持者">**琛</td>
-                            <td data-label="金额" class="amount">¥10.00</td>
-                            <td data-label="时间">2025-04-13</td>
-                            <td data-label="留言">加油！奥利给！</td>
+                            <td><span class="sponsor-avatar">琛</span>**琛</td>
+                            <td class="sponsor-amount">¥10.00</td>
+                            <td>2025-04-13</td>
+                            <td>加油！奥利给！</td>
                         </tr>
                         <tr>
-                            <td data-label="支持者">张*治</td>
-                            <td data-label="金额" class="amount">¥100.00</td>
-                            <td data-label="时间">2025-01-15</td>
-                            <td data-label="留言">加油！继续创作！</td>
+                            <td><span class="sponsor-avatar">张</span>张*治</td>
+                            <td class="sponsor-amount">¥100.00</td>
+                            <td>2025-01-15</td>
+                            <td>加油！继续创作！</td>
                         </tr>
                         <tr>
-                            <td data-label="支持者">李*</td>
-                            <td data-label="金额" class="amount">¥20.00</td>
-                            <td data-label="时间">2025-01-14</td>
-                            <td data-label="留言">内容很棒</td>
+                            <td><span class="sponsor-avatar">李</span>李*</td>
+                            <td class="sponsor-amount">¥20.00</td>
+                            <td>2025-01-14</td>
+                            <td>内容很棒</td>
                         </tr>
                         <tr>
-                            <td data-label="支持者">王**</td>
-                            <td data-label="金额" class="amount">¥30.00</td>
-                            <td data-label="时间">2025-01-13</td>
-                            <td data-label="留言">支持一下，继续加油</td>
+                            <td><span class="sponsor-avatar">王</span>王**</td>
+                            <td class="sponsor-amount">¥30.00</td>
+                            <td>2025-01-13</td>
+                            <td>支持一下，继续加油</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </section>
 
-            <p class="thank-you">✨ 感谢您的支持，让我们一起成长 ✨</p>
+        <!-- 更新记录 -->
+        <section class="section animate-in delay-3">
+            <div class="section-header">
+                <div class="section-icon">📅</div>
+                <h2 class="section-title">更新记录</h2>
             </div>
+            <div class="timeline">
+                <!-- 最新更新 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">
+                            📆 2026-04-13
+                            <span class="timeline-badge update">全站重构</span>
+                        </div>
+                        <div class="timeline-title">全站主题色统一 & 交互体验大幅提升</div>
+                        <p class="timeline-desc">对全站进行了全面的视觉升级和代码重构，修复了多个已知的交互问题，显著提升了桌面端与移动端的使用体验。</p>
+                        <ul class="timeline-list">
+                            <li><strong>首页焕新：</strong>全新 Hero 布局与数据统计展示，卡片式导航入口，视觉层次更清晰，支持平滑入场动画。</li>
+                            <li><strong>赞助页升级：</strong>新增更新记录时间线模块，重构了收款码卡片与赞助者荣誉榜 UI，交互更友好。</li>
+                            <li><strong>导航体验：</strong>修复了点击分类跳转错位问题，实现精准锚点滚动；移动端新增常驻搜索栏及清空功能。</li>
+                            <li><strong>视觉统一：</strong>全站（首页、导航、前台、赞助页）统一采用全新的粉色主题色 (#ff1d55)，设计风格更加现代化。</li>
+                            <li><strong>细节打磨：</strong>修复了返回顶部按钮与暗黑按钮重叠的问题；暗黑模式现在能自动识别系统偏好并记忆选择。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">
+                            📆 2026-04-01
+                            <span class="timeline-badge update">重大更新</span>
+                        </div>
+                        <div class="timeline-title">全站点 UI 焕新 & 搜索功能升级</div>
+                        <p class="timeline-desc">对全站进行了视觉升级，采用全新的粉色主题配色方案，并优化了导航页面的搜索体验。</p>
+                        <ul class="timeline-list">
+                            <li>全站统一粉色主题配色 (#ff1d55)</li>
+                            <li>导航页面搜索框增加清空按钮</li>
+                            <li>优化移动端底部导航栏样式</li>
+                            <li>修复点击分类跳转错位问题</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">
+                            📆 2026-03-25
+                            <span class="timeline-badge feature">新功能</span>
+                        </div>
+                        <div class="timeline-title">暗黑模式 & 响应式布局</div>
+                        <p class="timeline-desc">新增暗黑模式支持，并优化了移动端响应式体验。</p>
+                        <ul class="timeline-list">
+                            <li>全站支持暗黑模式切换</li>
+                            <li>移动端适配底部固定导航</li>
+                            <li>优化卡片式布局间距</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">
+                            📆 2026-03-05
+                            <span class="timeline-badge fix">优化</span>
+                        </div>
+                        <div class="timeline-title">导航分类结构调整</div>
+                        <p class="timeline-desc">重新整理了导航页面的分类结构，使内容更加清晰易读。</p>
+                        <ul class="timeline-list">
+                            <li>分类标题居中显示</li>
+                            <li>链接卡片采用弹性布局</li>
+                            <li>增加分类间视觉分隔</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">
+                            📆 20256-03-01
+                            <span class="timeline-badge feature">新功能</span>
+                        </div>
+                        <div class="timeline-title">壹号导航 正式上线</div>
+                        <p class="timeline-desc">导航页面正式上线，提供分类清晰的快捷入口。</p>
+                        <ul class="timeline-list">
+                            <li>25+ 分类，覆盖常用资源</li>
+                            <li>桌面端 & 移动端双端适配</li>
+                            <li>支持滚动高亮导航</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 感谢语 -->
+        <div class="thank-you animate-in delay-4">
+            <div class="thank-you-icon">🌟</div>
+            <h3>感谢您的每一份支持</h3>
+            <p>正是因为有你，我们才能走得更远、做得更好。让我们一起创造更多精彩内容！</p>
         </div>
     </div>
 
@@ -500,22 +672,5 @@
         <a href="qiantai.html">前台</a>
         <a href="about.html" class="active">搬砖</a>
     </nav>
-
-    <style>
-        /* 移动端底部导航 */
-        .mobile-bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
-            background: white; border-top: 1px solid #e5e7eb;
-            display: none; grid-template-columns: repeat(4, 1fr);
-            height: 40px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-        }
-        @media (max-width: 768px) { .mobile-bottom-nav { display: grid; } body { padding-bottom: 40px; } }
-        .mobile-bottom-nav a {
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: #6b7280; font-size: 14px; font-weight: 600; transition: all 0.2s ease;
-        }
-        .mobile-bottom-nav a:hover { color: #ff1d55; background: #fff1f5; }
-        .mobile-bottom-nav a.active { color: #ff1d55; }
-    </style>
 </body>
 </html>
