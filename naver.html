@@ -55,36 +55,609 @@
                 color: #f1f5f9 !important;
             }
         }
-        /* 导航高亮样式 */
+        
+        /* ===== 导航高亮样式 ===== */
         .nav-active {
-            @apply text-primary-600 dark:text-primary-400 font-bold border-b-2 border-primary-600 dark:border-primary-400 !important;
+            color: #ff1d55 !important;
+            font-weight: 700 !important;
+            border-bottom: 2px solid #ff1d55 !important;
         }
-        /* 去除移动端点击高亮 */
+        .dark .nav-active {
+            color: #ff4d74 !important;
+            border-bottom-color: #ff4d74 !important;
+        }
+        
+        /* ===== 通用样式 ===== */
         * {
             -webkit-tap-highlight-color: transparent;
         }
+        
         /* 自定义滚动条 */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            @apply bg-slate-100 dark:bg-slate-800;
+            background-color: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background-color: #1e293b;
         }
         ::-webkit-scrollbar-thumb {
-            @apply bg-slate-300 dark:bg-slate-600 rounded-full;
+            background-color: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #475569;
         }
         ::-webkit-scrollbar-thumb:hover {
-            @apply bg-slate-400 dark:bg-slate-500;
+            background-color: #94a3b8;
         }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background-color: #64748b;
+        }
+        
         /* 分类区块淡入动画 */
         .section-animate {
             animation: slideUp 0.4s ease-out backwards;
         }
-        /* 移动端优化 */
+        
+        /* ===== 顶部导航栏 (桌面端) ===== */
+        .desktop-nav {
+            display: none;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            width: 100%;
+            background-color: rgb(255 255 255 / 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+        .dark .desktop-nav {
+            background-color: rgb(2 6 23 / 0.95);
+            border-bottom-color: #1e293b;
+        }
+        @media (min-width: 768px) {
+            .desktop-nav { display: block; }
+        }
+        .desktop-nav-inner {
+            width: 100%;
+            padding: 1rem 1.5rem;
+        }
+        .desktop-nav-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            column-gap: 1.5rem;
+            row-gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            width: 100%;
+        }
+        .desktop-nav-link {
+            color: #334155;
+            transition: color 150ms;
+        }
+        .desktop-nav-link:hover {
+            color: #ff1d55;
+        }
+        .dark .desktop-nav-link {
+            color: #cbd5e1;
+        }
+        .dark .desktop-nav-link:hover {
+            color: #ff4d74;
+        }
+        .nav-link {
+            transition: color 150ms;
+        }
+        
+        /* ===== 移动端顶部导航 ===== */
+        .mobile-header {
+            display: block;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            background-color: rgb(255 255 255 / 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+        .dark .mobile-header {
+            background-color: rgb(2 6 23 / 0.95);
+            border-bottom-color: #1e293b;
+        }
+        @media (min-width: 768px) {
+            .mobile-header { display: none; }
+        }
+        .mobile-header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+        }
+        .mobile-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            color: #ff1d55;
+        }
+        .dark .mobile-logo {
+            color: #ff4d74;
+        }
+        .mobile-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .mobile-theme-btn {
+            width: 2.25rem;
+            height: 2.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            transition: all 150ms;
+        }
+        .dark .mobile-theme-btn {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            border-color: #334155;
+        }
+        .mobile-theme-btn:hover {
+            transform: scale(1.05);
+        }
+        .mobile-theme-btn:active {
+            transform: scale(0.95);
+        }
+        .mobile-menu-btn {
+            height: 2.25rem;
+            padding: 0 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            transition: all 150ms;
+        }
+        .dark .mobile-menu-btn {
+            background-color: #1e293b;
+            color: #f1f5f9;
+            border-color: #334155;
+        }
+        .mobile-menu-btn:hover {
+            background-color: #e2e8f0;
+        }
+        .dark .mobile-menu-btn:hover {
+            background-color: #334155;
+        }
+        
+        /* ===== 移动端搜索框 ===== */
+        .mobile-search-wrapper {
+            padding: 0 0.75rem 0.75rem;
+        }
+        .mobile-search-container {
+            position: relative;
+        }
+        .mobile-search-input {
+            width: 100%;
+            padding: 0.5rem 2rem 0.5rem 2rem;
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            outline: none;
+            transition: all 150ms;
+            font-size: 0.875rem;
+            color: #0f172a;
+        }
+        .dark .mobile-search-input {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        .mobile-search-input:focus {
+            border-color: #ff4d74;
+        }
+        .mobile-search-input::placeholder {
+            color: #94a3b8;
+        }
+        .mobile-search-icon {
+            position: absolute;
+            inset: 0;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            padding-left: 0.625rem;
+            pointer-events: none;
+        }
+        .mobile-search-icon svg {
+            width: 1rem;
+            height: 1rem;
+            color: #94a3b8;
+        }
+        .mobile-search-clear {
+            position: absolute;
+            inset: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            display: none;
+            align-items: center;
+            padding-right: 0.5rem;
+            color: #94a3b8;
+            transition: color 150ms;
+        }
+        .mobile-search-clear:hover {
+            color: #475569;
+        }
+        .dark .mobile-search-clear:hover {
+            color: #e2e8f0;
+        }
+        .mobile-search-clear svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        /* ===== 分类区块 ===== */
+        .category-section {
+            margin-bottom: 1.5rem;
+            scroll-margin-top: 8rem;
+        }
+        @media (min-width: 768px) {
+            .category-section { scroll-margin-top: 12rem; }
+        }
+        .category-section {
+            animation: slideUp 0.4s ease-out backwards;
+        }
+        .category-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ff1d55;
+        }
+        .dark .category-title {
+            color: #ff4d74;
+        }
+        .category-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .category-link {
+            padding: 0.375rem 1rem;
+            background-color: #fff;
+            color: #334155;
+            border-radius: 0.5rem;
+            transition: all 150ms;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .dark .category-link {
+            background-color: rgb(30 41 59 / 0.5);
+            color: #cbd5e1;
+            border-color: rgb(51 65 85 / 0.5);
+        }
+        .category-link:hover {
+            background-color: #f8fafc;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            color: #ff1d55;
+        }
+        .dark .category-link:hover {
+            background-color: #1e293b;
+            color: #ff4d74;
+        }
+        
+        /* ===== 移动端全部分类菜单 ===== */
+        .mobile-menu {
+            display: block;
+            position: fixed;
+            inset: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 4rem;
+            z-index: 60;
+            background-color: rgb(255 255 255 / 0.98);
+            backdrop-filter: blur(24px);
+            transform: translateX(100%);
+            transition: transform 300ms ease-in-out;
+        }
+        .dark .mobile-menu {
+            background-color: rgb(2 6 23 / 0.98);
+        }
+        @media (min-width: 768px) {
+            .mobile-menu { display: none; }
+        }
+        .mobile-menu-inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .dark .mobile-menu-header {
+            border-bottom-color: #1e293b;
+        }
+        .mobile-menu-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #0f172a;
+        }
+        .dark .mobile-menu-title {
+            color: #f1f5f9;
+        }
+        .mobile-menu-close {
+            padding: 0.5rem;
+            border-radius: 0.75rem;
+            background-color: #f1f5f9;
+            color: #64748b;
+            transition: all 150ms;
+        }
+        .dark .mobile-menu-close {
+            background-color: #1e293b;
+        }
+        .mobile-menu-close:hover {
+            background-color: #e2e8f0;
+        }
+        .dark .mobile-menu-close:hover {
+            background-color: #334155;
+        }
+        .mobile-menu-close svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .mobile-menu-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 0.75rem;
+            scroll-behavior: smooth;
+        }
+        .mobile-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.5rem;
+            padding-bottom: 0.75rem;
+        }
+        .mobile-menu-item {
+            padding: 0.375rem 0.5rem;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 500;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            transition: all 150ms;
+        }
+        .dark .mobile-menu-item {
+            background-color: #334155;
+            color: #cbd5e1;
+            border-color: #475569;
+        }
+        .mobile-menu-item:hover {
+            border-color: #ffa5b8;
+        }
+        .dark .mobile-menu-item:hover {
+            border-color: #ff4d74;
+        }
+        
+        /* ===== 移动端底部导航 ===== */
+        .mobile-bottom-nav {
+            display: grid;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            height: 2.5rem;
+            background-color: rgb(255 255 255 / 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid #e2e8f0;
+        }
+        .dark .mobile-bottom-nav {
+            background-color: rgb(15 23 42 / 0.95);
+            border-top-color: #1e293b;
+        }
+        @media (min-width: 768px) {
+            .mobile-bottom-nav { display: none; }
+        }
+        .mobile-bottom-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            transition: color 150ms;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .dark .mobile-bottom-link {
+            color: #94a3b8;
+        }
+        .mobile-bottom-link:hover {
+            color: #ff1d55;
+        }
+        .dark .mobile-bottom-link:hover {
+            color: #ff4d74;
+        }
+        
+        /* ===== 底部导航栏 (桌面端) ===== */
+        .desktop-footer {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            z-index: 40;
+            width: 100%;
+            background-color: rgb(255 255 255 / 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+        .dark .desktop-footer {
+            background-color: rgb(2 6 23 / 0.95);
+            border-top-color: #1e293b;
+        }
+        @media (min-width: 768px) {
+            .desktop-footer { display: block; }
+        }
+        .desktop-footer-inner {
+            width: 100%;
+            padding: 1rem 1.5rem;
+        }
+        .desktop-footer-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            column-gap: 2rem;
+            row-gap: 1rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            width: 100%;
+            color: #334155;
+        }
+        .dark .desktop-footer-list {
+            color: #cbd5e1;
+        }
+        .desktop-footer-link {
+            color: #334155;
+            transition: color 150ms;
+        }
+        .desktop-footer-link:hover {
+            color: #ff1d55;
+        }
+        .dark .desktop-footer-link {
+            color: #cbd5e1;
+        }
+        .dark .desktop-footer-link:hover {
+            color: #ff4d74;
+        }
+        .desktop-footer-link {
+            transition: color 150ms;
+        }
+        
+        /* ===== 右下角控制按钮组 ===== */
+        .control-buttons {
+            position: fixed;
+            bottom: 8rem;
+            right: 1rem;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        @media (min-width: 768px) {
+            .control-buttons {
+                bottom: 6rem;
+                right: 1.5rem;
+            }
+        }
+        .theme-toggle-desktop {
+            display: none;
+            width: 2.5rem;
+            height: 2.5rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            background-color: #fff;
+            color: #475569;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 150ms;
+        }
+        .dark .theme-toggle-desktop {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            border-color: #334155;
+        }
+        @media (min-width: 768px) {
+            .theme-toggle-desktop {
+                display: flex;
+                width: 2.75rem;
+                height: 2.75rem;
+            }
+        }
+        .theme-toggle-desktop:hover {
+            transform: scale(1.1);
+        }
+        .theme-toggle-desktop:active {
+            transform: scale(0.95);
+        }
+        .theme-toggle-desktop svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        @media (min-width: 768px) {
+            .theme-toggle-desktop svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+        .back-to-top-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            background-color: #ff1d55;
+            color: #fff;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            transition: all 300ms;
+            opacity: 0;
+            pointer-events: none;
+        }
+        @media (min-width: 768px) {
+            .back-to-top-btn {
+                width: 2.75rem;
+                height: 2.75rem;
+            }
+        }
+        .back-to-top-btn:hover {
+            background-color: #e61045;
+            transform: scale(1.1);
+        }
+        .back-to-top-btn:active {
+            transform: scale(0.95);
+        }
+        .back-to-top-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        @media (min-width: 768px) {
+            .back-to-top-btn svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+        
+        /* ===== 移动端优化 ===== */
         @media (max-width: 768px) {
             body {
-                padding-bottom: 60px;
+                padding-bottom: 40px;
             }
             #main-content {
                 padding: 16px;
@@ -105,34 +678,34 @@
 <body class="flex flex-col min-h-screen">
 
     <!-- 顶部固定导航栏 (1-25) -->
-    <header id="top-nav" class="hidden md:block sticky top-0 z-40 w-full bg-white/95 dark:bg-[#020617]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm" role="banner">
-        <nav class="w-full px-6 py-4" aria-label="顶部导航">
-            <ul id="top-nav-list" class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-bold w-full" role="list">
-                <li><a href="#section-1" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-1">万物归一</a></li>
-                <li><a href="#section-2" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-2">搜索标签</a></li>
-                <li><a href="#section-3" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-3">小白常用</a></li>
-                <li><a href="#section-4" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-4">分类 04</a></li>
-                <li><a href="#section-5" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-5">分类 05</a></li>
-                <li><a href="#section-6" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-6">分类 06</a></li>
-                <li><a href="#section-7" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-7">分类 07</a></li>
-                <li><a href="#section-8" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-8">分类 08</a></li>
-                <li><a href="#section-9" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-9">分类 09</a></li>
-                <li><a href="#section-10" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-10">分类 10</a></li>
-                <li><a href="#section-11" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-11">分类 11</a></li>
-                <li><a href="#section-12" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-12">分类 12</a></li>
-                <li><a href="#section-13" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-13">分类 13</a></li>
-                <li><a href="#section-14" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-14">分类 14</a></li>
-                <li><a href="#section-15" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-15">分类 15</a></li>
-                <li><a href="#section-16" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-16">分类 16</a></li>
-                <li><a href="#section-17" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-17">分类 17</a></li>
-                <li><a href="#section-18" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-18">分类 18</a></li>
-                <li><a href="#section-19" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-19">分类 19</a></li>
-                <li><a href="#section-20" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-20">分类 20</a></li>
-                <li><a href="#section-21" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-21">分类 21</a></li>
-                <li><a href="#section-22" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-22">分类 22</a></li>
-                <li><a href="#section-23" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-23">分类 23</a></li>
-                <li><a href="#section-24" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-24">分类 24</a></li>
-                <li><a href="#section-25" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-25">分类 25</a></li>
+    <header id="top-nav" class="desktop-nav" role="banner">
+        <nav class="desktop-nav-inner" aria-label="顶部导航">
+            <ul id="top-nav-list" class="desktop-nav-list" role="list">
+                <li><a href="#section-1" class="desktop-nav-link" data-id="section-1">万物归一</a></li>
+                <li><a href="#section-2" class="desktop-nav-link" data-id="section-2">搜索标签</a></li>
+                <li><a href="#section-3" class="desktop-nav-link" data-id="section-3">小白常用</a></li>
+                <li><a href="#section-4" class="desktop-nav-link" data-id="section-4">分类 04</a></li>
+                <li><a href="#section-5" class="desktop-nav-link" data-id="section-5">分类 05</a></li>
+                <li><a href="#section-6" class="desktop-nav-link" data-id="section-6">分类 06</a></li>
+                <li><a href="#section-7" class="desktop-nav-link" data-id="section-7">分类 07</a></li>
+                <li><a href="#section-8" class="desktop-nav-link" data-id="section-8">分类 08</a></li>
+                <li><a href="#section-9" class="desktop-nav-link" data-id="section-9">分类 09</a></li>
+                <li><a href="#section-10" class="desktop-nav-link" data-id="section-10">分类 10</a></li>
+                <li><a href="#section-11" class="desktop-nav-link" data-id="section-11">分类 11</a></li>
+                <li><a href="#section-12" class="desktop-nav-link" data-id="section-12">分类 12</a></li>
+                <li><a href="#section-13" class="desktop-nav-link" data-id="section-13">分类 13</a></li>
+                <li><a href="#section-14" class="desktop-nav-link" data-id="section-14">分类 14</a></li>
+                <li><a href="#section-15" class="desktop-nav-link" data-id="section-15">分类 15</a></li>
+                <li><a href="#section-16" class="desktop-nav-link" data-id="section-16">分类 16</a></li>
+                <li><a href="#section-17" class="desktop-nav-link" data-id="section-17">分类 17</a></li>
+                <li><a href="#section-18" class="desktop-nav-link" data-id="section-18">分类 18</a></li>
+                <li><a href="#section-19" class="desktop-nav-link" data-id="section-19">分类 19</a></li>
+                <li><a href="#section-20" class="desktop-nav-link" data-id="section-20">分类 20</a></li>
+                <li><a href="#section-21" class="desktop-nav-link" data-id="section-21">分类 21</a></li>
+                <li><a href="#section-22" class="desktop-nav-link" data-id="section-22">分类 22</a></li>
+                <li><a href="#section-23" class="desktop-nav-link" data-id="section-23">分类 23</a></li>
+                <li><a href="#section-24" class="desktop-nav-link" data-id="section-24">分类 24</a></li>
+                <li><a href="#section-25" class="desktop-nav-link" data-id="section-25">分类 25</a></li>
             </ul>
         </nav>
     </header>
@@ -172,12 +745,12 @@
     </div>
 
     <!-- 移动端顶部导航 (包含搜索，置顶) -->
-    <header class="md:hidden sticky top-0 z-50 w-full bg-white/95 dark:bg-[#020617]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm" role="banner">
-        <div class="flex items-center justify-between px-4 py-3">
-            <h1 class="text-2xl font-black tracking-tight text-primary-600 dark:text-primary-500">壹号导航</h1>
-            <div class="flex items-center gap-2">
+    <header class="mobile-header" role="banner">
+        <div class="mobile-header-inner">
+            <h1 class="mobile-logo">壹号导航</h1>
+            <div class="mobile-header-actions">
                 <!-- 暗黑模式切换按钮 (移动端) -->
-                <button id="theme-toggle-mobile" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:scale-105 active:scale-95 transition-all" aria-label="切换暗黑模式">
+                <button id="theme-toggle-mobile" class="mobile-theme-btn" aria-label="切换暗黑模式">
                     <!-- Sun Icon (Visible in Dark Mode) -->
                     <svg id="icon-sun-mobile" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707-.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 110 8 4 4 0 010-8z" />
@@ -188,25 +761,25 @@
                     </svg>
                 </button>
                 <!-- 全部分类按钮 -->
-                <button onclick="App.toggleMobileMenu()" class="h-9 px-3 flex items-center rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition-colors" aria-label="全部分类">
+                <button onclick="App.toggleMobileMenu()" class="mobile-menu-btn" aria-label="全部分类">
                     全部分类
                 </button>
             </div>
         </div>
-        <div class="px-3 pb-3">
-            <div class="relative">
+        <div class="mobile-search-wrapper">
+            <div class="mobile-search-container">
                 <input type="text" id="search-input-mobile" placeholder="搜索ing..."
-                       class="search-input w-full pl-8 pr-8 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-primary-500 rounded-lg outline-none transition-all text-sm text-slate-900 dark:text-white placeholder-slate-400"
+                       class="mobile-search-input"
                        autocomplete="off" aria-label="搜索">
                 <!-- Search Icon -->
-                <div class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="mobile-search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
                 <!-- Clear Button -->
-                <button id="clear-search-mobile" class="absolute inset-y-0 right-0 flex items-center pr-2 hidden text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" aria-label="清空搜索">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button id="clear-search-mobile" class="mobile-search-clear" aria-label="清空搜索">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
@@ -219,15 +792,15 @@
         <div id="category-container">
             <!-- 分类 01 -->
             <section id="section-1" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">万物归一</h2>
+                    <h2 class="category-title">万物归一</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                <div class="category-links">
+                    <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         示例链接 01
                     </a>
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         GitHub
                     </a>
                 </div>
@@ -235,45 +808,45 @@
 
             <!-- 分类 02 -->
             <section id="section-2" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">搜索标签</h2>
+                    <h2 class="category-title">搜索标签</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                <div class="category-links">
+                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Google
                     </a>
-                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         百度
                     </a>
-                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Bing
                     </a>
-                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Google
                     </a>
-                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         百度
                     </a>
-                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Bing
                     </a>
-                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Google
                     </a>
-                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         百度
                     </a>
-                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Bing
                     </a>
-                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Google
                     </a>
-                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         百度
                     </a>
-                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">
+                    <a href="https://bing.com" target="_blank" rel="noopener noreferrer" class="category-link">
                         Bing
                     </a>
                 </div>
@@ -281,279 +854,279 @@
 
             <!-- 分类 03-60 (简化结构) -->
             <section id="section-3" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">小白常用</h2>
+                    <h2 class="category-title">小白常用</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
-            <section id="section-4" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 04</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-5" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 05</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-6" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 06</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-7" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 07</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-8" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 08</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-9" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 09</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-10" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 10</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-11" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 11</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-12" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 12</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-13" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 13</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-14" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 14</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-15" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 15</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-16" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 16</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-17" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 17</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-18" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 18</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-19" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 19</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-20" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 20</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-21" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 21</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-22" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 22</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-23" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 23</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-24" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 24</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-25" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 25</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-26" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 26</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-27" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 27</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-28" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 28</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-29" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 29</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-30" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 30</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
+            <section id="section-4" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 04</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-5" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 05</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-6" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 06</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-7" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 07</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-8" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 08</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-9" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 09</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-10" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 10</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-11" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 11</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-12" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 12</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-13" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 13</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-14" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 14</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-15" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 15</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-16" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 16</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-17" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 17</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-18" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 18</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-19" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 19</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-20" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 20</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-21" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 21</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-22" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 22</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-23" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 23</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-24" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 24</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-25" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 25</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-26" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 26</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-27" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 27</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-28" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 28</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-29" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 29</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-30" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 30</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
             <section id="section-31" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 31</h2>
+                    <h2 class="category-title">分类名称 31</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-32" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 32</h2>
+                    <h2 class="category-title">分类名称 32</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-33" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 33</h2>
+                    <h2 class="category-title">分类名称 33</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-34" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 34</h2>
+                    <h2 class="category-title">分类名称 34</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-35" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 35</h2>
+                    <h2 class="category-title">分类名称 35</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-4" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 04</h2>
+                    <h2 class="category-title">分类名称 04</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
-            <section id="section-5" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 05</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-6" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 06</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-7" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 07</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-8" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 08</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-9" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 09</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-10" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 10</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-11" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 11</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-12" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 12</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-13" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 13</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-14" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 14</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-15" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 15</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-16" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 16</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-17" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 17</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-18" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 18</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-19" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 19</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-20" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 20</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-21" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 21</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-22" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 22</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-23" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 23</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-24" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 24</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-25" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 25</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-26" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 26</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-27" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 27</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-28" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 28</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-29" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 29</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
-            <section id="section-30" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="text-center mb-4"><h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 30</h2></div><div class="flex flex-wrap gap-2"><a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a></div></section>
+            <section id="section-5" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 05</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-6" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 06</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-7" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 07</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-8" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 08</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-9" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 09</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-10" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 10</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-11" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 11</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-12" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 12</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-13" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 13</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-14" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 14</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-15" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 15</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-16" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 16</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-17" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 17</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-18" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 18</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-19" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 19</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-20" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 20</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-21" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 21</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-22" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 22</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-23" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 23</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-24" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 24</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-25" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 25</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-26" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 26</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-27" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 27</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-28" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 28</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-29" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 29</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
+            <section id="section-30" class="mb-6 scroll-mt-32 md:scroll-mt-48"><div class="category-header"><h2 class="category-title">分类名称 30</h2></div><div class="category-links"><a href="#" target="_blank" class="category-link">链接</a></div></section>
             <section id="section-31" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 31</h2>
+                    <h2 class="category-title">分类名称 31</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-32" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 32</h2>
+                    <h2 class="category-title">分类名称 32</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-33" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 33</h2>
+                    <h2 class="category-title">分类名称 33</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-34" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 34</h2>
+                    <h2 class="category-title">分类名称 34</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
             <section id="section-35" class="mb-6 scroll-mt-32 md:scroll-mt-48">
-                <div class="text-center mb-4">
+                <div class="category-header">
                     
-                    <h2 class="text-xl font-bold text-primary-600 dark:text-primary-500">分类名称 35</h2>
+                    <h2 class="category-title">分类名称 35</h2>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="#" target="_blank" class="px-4 py-1.5 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-md transition-all text-sm font-medium border border-slate-100 dark:border-slate-700/50 truncate">链接</a>
+                <div class="category-links">
+                    <a href="#" target="_blank" class="category-link">链接</a>
                 </div>
             </section>
         </div>
 
     <!-- 底部固定导航栏 (36-60) -->
-    <footer id="bottom-nav" class="hidden md:block fixed bottom-0 z-40 w-full bg-white/95 dark:bg-[#020617]/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 shadow-lg" role="contentinfo">
-        <nav class="w-full px-6 py-4" aria-label="底部导航">
-            <ul id="bottom-nav-list" class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm font-bold w-full text-slate-700 dark:text-slate-300" role="list">
-                <li><a href="#section-36" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-36">分类 36</a></li>
-                <li><a href="#section-37" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-37">分类 37</a></li>
-                <li><a href="#section-38" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-38">分类 38</a></li>
-                <li><a href="#section-39" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-39">分类 39</a></li>
-                <li><a href="#section-40" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-40">分类 40</a></li>
-                <li><a href="#section-41" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-41">分类 41</a></li>
-                <li><a href="#section-42" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-42">分类 42</a></li>
-                <li><a href="#section-43" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-43">分类 43</a></li>
-                <li><a href="#section-44" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-44">分类 44</a></li>
-                <li><a href="#section-45" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-45">分类 45</a></li>
-                <li><a href="#section-46" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-46">分类 46</a></li>
-                <li><a href="#section-47" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-47">分类 47</a></li>
-                <li><a href="#section-48" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-48">分类 48</a></li>
-                <li><a href="#section-49" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-49">分类 49</a></li>
-                <li><a href="#section-50" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-50">分类 50</a></li>
-                <li><a href="#section-51" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-51">分类 51</a></li>
-                <li><a href="#section-52" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-52">分类 52</a></li>
-                <li><a href="#section-53" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-53">分类 53</a></li>
-                <li><a href="#section-54" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-54">分类 54</a></li>
-                <li><a href="#section-55" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-55">分类 55</a></li>
-                <li><a href="#section-56" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-56">分类 56</a></li>
-                <li><a href="#section-57" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-57">分类 57</a></li>
-                <li><a href="#section-58" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-58">分类 58</a></li>
-                <li><a href="#section-59" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-59">分类 59</a></li>
-                <li><a href="#section-60" class="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors nav-link" data-id="section-60">分类 60</a></li>
+    <footer id="bottom-nav" class="desktop-footer" role="contentinfo">
+        <nav class="desktop-footer-inner" aria-label="底部导航">
+            <ul id="bottom-nav-list" class="desktop-footer-list" role="list">
+                <li><a href="#section-36" class="desktop-footer-link" data-id="section-36">分类 36</a></li>
+                <li><a href="#section-37" class="desktop-footer-link" data-id="section-37">分类 37</a></li>
+                <li><a href="#section-38" class="desktop-footer-link" data-id="section-38">分类 38</a></li>
+                <li><a href="#section-39" class="desktop-footer-link" data-id="section-39">分类 39</a></li>
+                <li><a href="#section-40" class="desktop-footer-link" data-id="section-40">分类 40</a></li>
+                <li><a href="#section-41" class="desktop-footer-link" data-id="section-41">分类 41</a></li>
+                <li><a href="#section-42" class="desktop-footer-link" data-id="section-42">分类 42</a></li>
+                <li><a href="#section-43" class="desktop-footer-link" data-id="section-43">分类 43</a></li>
+                <li><a href="#section-44" class="desktop-footer-link" data-id="section-44">分类 44</a></li>
+                <li><a href="#section-45" class="desktop-footer-link" data-id="section-45">分类 45</a></li>
+                <li><a href="#section-46" class="desktop-footer-link" data-id="section-46">分类 46</a></li>
+                <li><a href="#section-47" class="desktop-footer-link" data-id="section-47">分类 47</a></li>
+                <li><a href="#section-48" class="desktop-footer-link" data-id="section-48">分类 48</a></li>
+                <li><a href="#section-49" class="desktop-footer-link" data-id="section-49">分类 49</a></li>
+                <li><a href="#section-50" class="desktop-footer-link" data-id="section-50">分类 50</a></li>
+                <li><a href="#section-51" class="desktop-footer-link" data-id="section-51">分类 51</a></li>
+                <li><a href="#section-52" class="desktop-footer-link" data-id="section-52">分类 52</a></li>
+                <li><a href="#section-53" class="desktop-footer-link" data-id="section-53">分类 53</a></li>
+                <li><a href="#section-54" class="desktop-footer-link" data-id="section-54">分类 54</a></li>
+                <li><a href="#section-55" class="desktop-footer-link" data-id="section-55">分类 55</a></li>
+                <li><a href="#section-56" class="desktop-footer-link" data-id="section-56">分类 56</a></li>
+                <li><a href="#section-57" class="desktop-footer-link" data-id="section-57">分类 57</a></li>
+                <li><a href="#section-58" class="desktop-footer-link" data-id="section-58">分类 58</a></li>
+                <li><a href="#section-59" class="desktop-footer-link" data-id="section-59">分类 59</a></li>
+                <li><a href="#section-60" class="desktop-footer-link" data-id="section-60">分类 60</a></li>
             </ul>
         </nav>
     </footer>
 
     <!-- 移动端全部分类抽屉菜单 -->
-    <div id="mobile-menu" class="md:hidden fixed inset-x-0 top-0 bottom-16 z-[60] bg-white/98 dark:bg-[#020617]/98 backdrop-blur-xl translate-x-full transition-transform duration-300 ease-in-out" role="dialog" aria-label="全部分类菜单" aria-hidden="true">
-        <div class="h-full flex flex-col">
-            <div class="flex items-center justify-between px-5 py-3 border-b border-slate-100 dark:border-slate-800">
-                <h2 class="text-xl font-black text-slate-900 dark:text-white">全部分类</h2>
-                <button onclick="App.toggleMobileMenu()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="关闭菜单">
+    <div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="全部分类菜单" aria-hidden="true">
+        <div class="mobile-menu-inner">
+            <div class="mobile-menu-header">
+                <h2 class="mobile-menu-title">全部分类</h2>
+                <button onclick="App.toggleMobileMenu()" class="mobile-menu-close" aria-label="关闭菜单">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
-            <div class="flex-grow overflow-y-auto p-3 scroll-smooth">
-                <div id="mobile-menu-grid" class="grid grid-cols-4 gap-2 pb-3">
-                    <a href="#section-1" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">万物归一</a>
-                    <a href="#section-2" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">搜索标签</a>
-                    <a href="#section-3" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">小白常用</a>
-                    <a href="#section-4" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 04</a>
-                    <a href="#section-5" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 05</a>
-                    <a href="#section-6" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 06</a>
-                    <a href="#section-7" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 07</a>
-                    <a href="#section-8" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 08</a>
-                    <a href="#section-9" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 09</a>
-                    <a href="#section-10" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 10</a>
-                    <a href="#section-11" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 11</a>
-                    <a href="#section-12" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 12</a>
-                    <a href="#section-13" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 13</a>
-                    <a href="#section-14" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 14</a>
-                    <a href="#section-15" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 15</a>
-                    <a href="#section-16" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 16</a>
-                    <a href="#section-17" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 17</a>
-                    <a href="#section-18" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 18</a>
-                    <a href="#section-19" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 19</a>
-                    <a href="#section-20" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 20</a>
-                    <a href="#section-21" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 21</a>
-                    <a href="#section-22" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 22</a>
-                    <a href="#section-23" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 23</a>
-                    <a href="#section-24" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 24</a>
-                    <a href="#section-25" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 25</a>
-                    <a href="#section-26" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 26</a>
-                    <a href="#section-27" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 27</a>
-                    <a href="#section-28" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 28</a>
-                    <a href="#section-29" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 29</a>
-                    <a href="#section-30" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 30</a>
-                    <a href="#section-31" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 31</a>
-                    <a href="#section-32" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 32</a>
-                    <a href="#section-33" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 33</a>
-                    <a href="#section-34" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 34</a>
-                    <a href="#section-35" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 35</a>
-                    <a href="#section-36" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 36</a>
-                    <a href="#section-37" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 37</a>
-                    <a href="#section-38" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 38</a>
-                    <a href="#section-39" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 39</a>
-                    <a href="#section-40" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 40</a>
-                    <a href="#section-41" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 41</a>
-                    <a href="#section-42" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 42</a>
-                    <a href="#section-43" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 43</a>
-                    <a href="#section-44" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 44</a>
-                    <a href="#section-45" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 45</a>
-                    <a href="#section-46" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 46</a>
-                    <a href="#section-47" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 47</a>
-                    <a href="#section-48" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 48</a>
-                    <a href="#section-49" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 49</a>
-                    <a href="#section-50" onclick="App.toggleMobileMenu()" class="px-1.5 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-center text-[11px] font-medium text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-500 transition-colors">分类 50</a>
+            <div class="mobile-menu-content">
+                <div id="mobile-menu-grid" class="mobile-menu-grid">
+                    <a href="#section-1" onclick="App.toggleMobileMenu()" class="mobile-menu-item">万物归一</a>
+                    <a href="#section-2" onclick="App.toggleMobileMenu()" class="mobile-menu-item">搜索标签</a>
+                    <a href="#section-3" onclick="App.toggleMobileMenu()" class="mobile-menu-item">小白常用</a>
+                    <a href="#section-4" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 04</a>
+                    <a href="#section-5" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 05</a>
+                    <a href="#section-6" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 06</a>
+                    <a href="#section-7" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 07</a>
+                    <a href="#section-8" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 08</a>
+                    <a href="#section-9" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 09</a>
+                    <a href="#section-10" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 10</a>
+                    <a href="#section-11" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 11</a>
+                    <a href="#section-12" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 12</a>
+                    <a href="#section-13" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 13</a>
+                    <a href="#section-14" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 14</a>
+                    <a href="#section-15" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 15</a>
+                    <a href="#section-16" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 16</a>
+                    <a href="#section-17" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 17</a>
+                    <a href="#section-18" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 18</a>
+                    <a href="#section-19" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 19</a>
+                    <a href="#section-20" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 20</a>
+                    <a href="#section-21" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 21</a>
+                    <a href="#section-22" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 22</a>
+                    <a href="#section-23" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 23</a>
+                    <a href="#section-24" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 24</a>
+                    <a href="#section-25" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 25</a>
+                    <a href="#section-26" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 26</a>
+                    <a href="#section-27" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 27</a>
+                    <a href="#section-28" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 28</a>
+                    <a href="#section-29" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 29</a>
+                    <a href="#section-30" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 30</a>
+                    <a href="#section-31" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 31</a>
+                    <a href="#section-32" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 32</a>
+                    <a href="#section-33" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 33</a>
+                    <a href="#section-34" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 34</a>
+                    <a href="#section-35" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 35</a>
+                    <a href="#section-36" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 36</a>
+                    <a href="#section-37" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 37</a>
+                    <a href="#section-38" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 38</a>
+                    <a href="#section-39" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 39</a>
+                    <a href="#section-40" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 40</a>
+                    <a href="#section-41" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 41</a>
+                    <a href="#section-42" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 42</a>
+                    <a href="#section-43" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 43</a>
+                    <a href="#section-44" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 44</a>
+                    <a href="#section-45" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 45</a>
+                    <a href="#section-46" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 46</a>
+                    <a href="#section-47" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 47</a>
+                    <a href="#section-48" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 48</a>
+                    <a href="#section-49" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 49</a>
+                    <a href="#section-50" onclick="App.toggleMobileMenu()" class="mobile-menu-item">分类 50</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 移动端底部 Tab 栏 -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 grid grid-cols-4 h-10" role="navigation" aria-label="移动端导航">
-        <a href="index.html" class="flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm">首页</a>
-        <a href="naver.html" class="flex items-center justify-center text-primary-600 dark:text-primary-400 font-semibold text-sm" aria-current="page">导航</a>
-        <a href="qiantai.html" class="flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm">前台</a>
-        <a href="about.html" class="flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm">搬砖</a>
+    <nav class="mobile-bottom-nav" role="navigation" aria-label="移动端导航">
+        <a href="index.html" class="mobile-bottom-link">首页</a>
+        <a href="naver.html" class="mobile-bottom-link text-primary-600 dark:text-primary-400" aria-current="page">导航</a>
+        <a href="qiantai.html" class="mobile-bottom-link">前台</a>
+        <a href="about.html" class="mobile-bottom-link">搬砖</a>
     </nav>
 
     <!-- 右下角控制按钮组 -->
-    <div class="fixed bottom-32 md:bottom-24 right-4 md:right-6 z-[100] flex flex-col space-y-3" role="toolbar" aria-label="页面控制">
+    <div class="control-buttons" role="toolbar" aria-label="页面控制">
         <!-- 暗黑模式切换按钮 (仅桌面端显示) -->
-        <button id="theme-toggle" class="hidden md:flex w-10 h-10 md:w-11 h-11 items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-lg border border-slate-200 dark:border-slate-700 hover:scale-110 active:scale-95 transition-all" aria-label="切换暗黑模式">
+        <button id="theme-toggle" class="theme-toggle-desktop" aria-label="切换暗黑模式">
             <!-- Sun Icon (Visible in Dark Mode) -->
             <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 hidden dark:block text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707-.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 110 8 4 4 0 010-8z" />
@@ -565,7 +1138,7 @@
         </button>
         <!-- 返回顶部按钮 -->
         <button id="back-to-top"
-                class="w-10 h-10 md:w-11 h-11 flex items-center justify-center rounded-xl bg-primary-600 text-white shadow-lg hover:bg-primary-700 hover:scale-110 active:scale-95 transition-all duration-300 opacity-0 pointer-events-none"
+                class="back-to-top-btn"
                 style="visibility: hidden;" aria-label="返回顶部">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
@@ -785,7 +1358,7 @@
                     if (state.activeSection === activeId) return;
                     state.activeSection = activeId;
 
-                    DOM.$$('.nav-link').forEach(link => {
+                    DOM.$$('.desktop-nav-link').forEach(link => {
                         const isActive = link.dataset.id === activeId;
                         link.classList.toggle('nav-active', isActive);
                     });
