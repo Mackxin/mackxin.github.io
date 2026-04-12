@@ -5,35 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/xininn.ico" />
     <title>壹号栈</title>
-    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* 移动端底部导航 */
-        .mobile-bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
-            background: white; border-top: 1px solid #e5e7eb;
-            display: none; grid-template-columns: repeat(4, 1fr);
-            height: 40px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-        }
-        @media (max-width: 768px) { .mobile-bottom-nav { display: grid; } body { padding-bottom: 40px; } }
-        .mobile-bottom-nav a {
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: #6b7280; font-size: 14px; font-weight: 600; transition: all 0.2s ease;
-        }
-        .mobile-bottom-nav a:hover { color: #ff1d55; background: #fff1f5; }
-        .mobile-bottom-nav a.active { color: #ff1d55; }
         :root {
-            --bg-color: #f3f4f6;
-            --text-main: #0f172a;
-            --text-secondary: #6b7280;
-            --accent-color: #ff1d55; /* 粉色主题 */
-            --accent-hover: #ff7a95;
+            --primary: #ff1d55;
+            --primary-light: #ff7a95;
+            --primary-dark: #e61045;
+            --bg: #fafafa;
             --card-bg: #ffffff;
-            --card-hover-bg: #fff1f5;
-            --border-color: #e5e7eb;
-            --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
-            --shadow-hover: 0 18px 55px rgba(255, 29, 85, 0.15);
-            --radius-lg: 22px;
-            --radius-md: 16px;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
 
         * {
@@ -44,124 +30,189 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background-image:
-                radial-gradient(at 0% 0%, rgba(255, 29, 85, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(255, 122, 149, 0.08) 0px, transparent 50%);
-            background-attachment: fixed;
+            overflow-x: hidden;
         }
 
-        .main-wrapper {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 2rem;
-            max-width: 1000px;
-            width: 100%;
-            perspective: 1000px;
-        }
-
-        /* 左侧个人卡片 */
-        .profile-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 18px 55px rgba(15, 23, 42, 0.12);
-            border: 1px solid rgba(255,255,255,0.5);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .profile-card::before {
-            content: '';
-            position: absolute;
-            inset: -80px -80px auto auto;
-            background: radial-gradient(circle at 100% 0, rgba(255, 29, 85, 0.12), transparent 60%);
-            pointer-events: none;
-        }
-
-        .profile-card::after {
-            content: '';
-            position: absolute;
+        /* 背景装饰 */
+        .bg-decoration {
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 150px;
-            background: linear-gradient(135deg, #ff1d55, #ff7a95);
+            bottom: 0;
+            pointer-events: none;
             z-index: 0;
+            overflow: hidden;
         }
 
-        .qr-wrapper {
-            width: 160px;
-            height: 160px;
-            padding: 8px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
+        .bg-decoration::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 29, 85, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bg-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 122, 149, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
             z-index: 1;
-            margin-top: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* 头部 Hero 区域 */
+        .hero {
+            text-align: center;
+            padding: 3rem 0 4rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 29, 85, 0.08);
+            color: var(--primary);
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
             margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 29, 85, 0.15);
         }
 
-        .qr-wrapper:hover {
-            transform: scale(1.05) rotate(-2deg);
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
-        .qr-wrapper img {
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        /* 个人资料卡片 */
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: var(--shadow);
+            border: 3px solid white;
+        }
+
+        .profile-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 12px;
         }
 
-        .profile-info {
-            z-index: 1;
-        }
-
-        .profile-title {
-            font-size: 1.75rem;
+        .profile-info h2 {
+            font-size: 1.5rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .profile-desc {
+        .profile-info p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1rem;
         }
 
-        /* 右侧导航网格 */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            align-content: center;
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .nav-item {
+        .profile-tags span {
+            padding: 0.375rem 0.75rem;
+            background: #f1f5f9;
+            color: var(--text-secondary);
+            border-radius: 8px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        /* 导航卡片网格 */
+        .nav-section-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .nav-card {
             background: var(--card-bg);
-            border-radius: var(--radius-md);
-            padding: 2rem;
+            border-radius: 20px;
+            padding: 1.75rem;
             text-decoration: none;
-            color: var(--text-main);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
+            color: var(--text);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
@@ -170,18 +221,35 @@
             overflow: hidden;
         }
 
-        .nav-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent-color);
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
         }
 
-        .nav-icon {
-            width: 48px;
-            height: 48px;
-            background: #eef2ff;
-            color: var(--accent-color);
-            border-radius: 12px;
+        .nav-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(255, 29, 85, 0.3);
+        }
+
+        .nav-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-card-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, rgba(255, 29, 85, 0.1) 0%, rgba(255, 122, 149, 0.1) 100%);
+            color: var(--primary);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -189,162 +257,236 @@
             transition: all 0.3s ease;
         }
 
-        .nav-item:hover .nav-icon {
-            background: var(--accent-color);
+        .nav-card:hover .nav-card-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
-            transform: rotate(10deg);
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .nav-content h3 {
-            font-size: 1.25rem;
+        .nav-card-content h3 {
+            font-size: 1.125rem;
             font-weight: 700;
             margin-bottom: 0.25rem;
         }
 
-        .nav-content p {
+        .nav-card-content p {
             color: var(--text-secondary);
             font-size: 0.875rem;
+            line-height: 1.5;
         }
 
-        .nav-arrow {
+        .nav-card-arrow {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
-            color: var(--text-secondary);
             opacity: 0;
-            transform: translateX(-10px);
+            transform: translateX(-8px);
             transition: all 0.3s ease;
+            color: var(--primary);
         }
 
-        .nav-item:hover .nav-arrow {
+        .nav-card:hover .nav-card-arrow {
             opacity: 1;
             transform: translateX(0);
-            color: var(--accent-color);
         }
 
-        /* 响应式调整 */
-        @media (max-width: 900px) {
-            .main-wrapper {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .profile-card {
-                flex-direction: row;
-                text-align: left;
-                padding: 1.5rem;
-                align-items: center;
-                gap: 1.5rem;
-            }
-
-            .profile-card::before {
-                height: 100%;
-                width: 6px;
-                right: auto;
-            }
-
-            .qr-wrapper {
-                margin: 0;
-                width: 100px;
-                height: 100px;
-                flex-shrink: 0;
-            }
-
-            .profile-info {
-                flex: 1;
-            }
+        /* 底部统计 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem;
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.25rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* 移动端底部导航 */
+        .mobile-bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+            background: white; border-top: 1px solid #e5e7eb;
+            display: none; grid-template-columns: repeat(4, 1fr);
+            height: 60px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        @media (max-width: 768px) { 
+            .mobile-bottom-nav { display: grid; } 
+            body { padding-bottom: 60px; }
+        }
+        .mobile-bottom-nav a {
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: #6b7280; font-size: 14px; font-weight: 600; transition: all 0.2s ease;
+        }
+        .mobile-bottom-nav a:hover { color: #ff1d55; background: #fff1f5; }
+        .mobile-bottom-nav a.active { color: #ff1d55; }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 1rem 3rem;
+            }
+
+            .hero {
+                padding: 2rem 0 3rem;
             }
 
             .profile-card {
                 flex-direction: column;
                 text-align: center;
-                padding: 2rem 1.5rem;
+                padding: 1.5rem;
             }
 
-            .profile-card::before {
-                width: 100%;
+            .profile-avatar {
+                width: 100px;
                 height: 100px;
-                right: 0;
             }
 
-            .qr-wrapper {
-                margin-top: 1rem;
-                width: 140px;
-                height: 140px;
+            .profile-tags {
+                justify-content: center;
             }
 
             .nav-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
-            .nav-item {
-                flex-direction: row;
-                align-items: center;
-                padding: 1.5rem;
-            }
-            
-            .nav-arrow {
-                position: static;
-                opacity: 1;
-                transform: none;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <div class="main-wrapper">
-        <!-- 左侧个人信息 -->
-        <aside class="profile-card">
-            <div class="qr-wrapper">
-                <img src="img/111.png" alt="QR Code">
+    <div class="bg-decoration"></div>
+    
+    <div class="container">
+        <!-- Hero 区域 -->
+        <section class="hero animate-in">
+            <div class="hero-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                探索 · 发现 · 记录
+            </div>
+            <h1 class="hero-title">欢迎来到 <span>壹号栈</span></h1>
+            <p class="hero-subtitle">发现更大的世界，记录更真的自我。在这里探索精选资源，获取前沿资讯，捕捉灵感瞬间。</p>
+        </section>
+
+        <!-- 个人资料卡片 -->
+        <div class="profile-card animate-in delay-1">
+            <div class="profile-avatar">
+                <img src="img/111.png" alt="头像">
             </div>
             <div class="profile-info">
-                <h1 class="profile-title">壹号栈</h1>
-                <p class="profile-desc">发现更大的世界，记录更真的自我。<br>欢迎来到我的数字花园。</p>
+                <h2>壹号栈</h2>
+                <p>你的数字花园，记录生活点滴与技术成长。</p>
+                <div class="profile-tags">
+                    <span>🚀 探索者</span>
+                    <span>✍️ 记录者</span>
+                    <span>💡 创造者</span>
+                </div>
             </div>
-        </aside>
+        </div>
 
-        <!-- 右侧导航链接 -->
-        <nav class="nav-grid">
-            <a href="naver.html" class="nav-item" target="_blank">
-                <div class="nav-icon"><i class="fas fa-compass"></i></div>
-                <div class="nav-content">
+        <!-- 统计信息 -->
+        <div class="stats-grid animate-in delay-2">
+            <div class="stat-card">
+                <div class="stat-number">60+</div>
+                <div class="stat-label">导航分类</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">精选资源</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">灵感可能</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">持续更新</div>
+            </div>
+        </div>
+
+        <!-- 导航卡片 -->
+        <div class="nav-section-title animate-in delay-3">快速访问</div>
+        <nav class="nav-grid animate-in delay-3">
+            <a href="naver.html" class="nav-card" target="_blank">
+                <div class="nav-card-icon">🧭</div>
+                <div class="nav-card-content">
                     <h3>壹号导航</h3>
-                    <p>探索精选网络资源</p>
+                    <p>探索精选网络资源，快速直达优质内容</p>
                 </div>
-                <div class="nav-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="nav-card-arrow">→</div>
             </a>
 
-            <a href="qiantai.html" class="nav-item" target="_blank">
-                <div class="nav-icon"><i class="fas fa-newspaper"></i></div>
-                <div class="nav-content">
+            <a href="qiantai.html" class="nav-card" target="_blank">
+                <div class="nav-card-icon">📰</div>
+                <div class="nav-card-content">
                     <h3>壹号讯息</h3>
-                    <p>获取最新前沿资讯</p>
+                    <p>获取最新前沿资讯，把握时代脉搏</p>
                 </div>
-                <div class="nav-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="nav-card-arrow">→</div>
             </a>
 
-            <a href="ling/linggan.html" class="nav-item" target="_blank">
-                <div class="nav-icon"><i class="fas fa-lightbulb"></i></div>
-                <div class="nav-content">
+            <a href="ling/linggan.html" class="nav-card" target="_blank">
+                <div class="nav-card-icon">💡</div>
+                <div class="nav-card-content">
                     <h3>灵感随记</h3>
-                    <p>捕捉转瞬即逝的想法</p>
+                    <p>捕捉转瞬即逝的想法，记录创意火花</p>
                 </div>
-                <div class="nav-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="nav-card-arrow">→</div>
             </a>
 
-            <a href="ling/rensheng.html" class="nav-item" target="_blank">
-                <div class="nav-icon"><i class="fas fa-book-open"></i></div>
-                <div class="nav-content">
+            <a href="ling/rensheng.html" class="nav-card" target="_blank">
+                <div class="nav-card-icon">📖</div>
+                <div class="nav-card-content">
                     <h3>人生学岩</h3>
-                    <p>分享生活感悟与哲学</p>
+                    <p>分享生活感悟与哲学，品味人生百态</p>
                 </div>
-                <div class="nav-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="nav-card-arrow">→</div>
             </a>
         </nav>
     </div>
@@ -356,22 +498,5 @@
         <a href="qiantai.html">前台</a>
         <a href="about.html">搬砖</a>
     </nav>
-
-    <style>
-        /* 移动端底部导航 */
-        .mobile-bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
-            background: white; border-top: 1px solid #e5e7eb;
-            display: none; grid-template-columns: repeat(4, 1fr);
-            height: 40px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-        }
-        @media (max-width: 768px) { .mobile-bottom-nav { display: grid; } body { padding-bottom: 40px; } }
-        .mobile-bottom-nav a {
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: #6b7280; font-size: 14px; font-weight: 600; transition: all 0.2s ease;
-        }
-        .mobile-bottom-nav a:hover { color: #ff1d55; background: #fff1f5; }
-        .mobile-bottom-nav a.active { color: #ff1d55; }
-    </style>
 </body>
 </html>
