@@ -5633,10 +5633,10 @@
 
     <!-- 移动端底部导航 -->
     <nav class="mobile-bottom-nav" role="navigation" aria-label="移动端导航">
-        <a href="index.html">首页</a>
-        <a href="naver.html">导航</a>
-        <a href="qiantai.html" class="active">前台</a>
-        <a href="about.html">搬砖</a>
+        <a href="index.html" class="mobile-nav-link" data-page="index.html">首页</a>
+        <a href="naver.html" class="mobile-nav-link" data-page="naver.html">导航</a>
+        <a href="qiantai.html" class="mobile-nav-link active" data-page="qiantai.html">前台</a>
+        <a href="about.html" class="mobile-nav-link" data-page="about.html">搬砖</a>
     </nav>
 
     <style>
@@ -5683,6 +5683,68 @@
         .mobile-bottom-nav a.active {
             color: #ff1d55;
         }
+    </style>
+
+    <!-- 移动端页面切换脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname.split('/').pop() || 'qiantai.html';
+            const pages = ['index.html', 'naver.html', 'qiantai.html', 'about.html'];
+            let isTransitioning = false;
+            
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const targetPage = link.dataset.page;
+                    if (targetPage === currentPage || isTransitioning) return;
+                    
+                    isTransitioning = true;
+                    const container = document.querySelector('.page') || document.body;
+                    const currentIndex = pages.indexOf(currentPage);
+                    const targetIndex = pages.indexOf(targetPage);
+                    const isForward = targetIndex > currentIndex;
+                    
+                    container.style.opacity = '0.5';
+                    container.style.pointerEvents = 'none';
+                    
+                    try {
+                        const response = await fetch(targetPage);
+                        const html = await response.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        
+                        if (doc.title) document.title = doc.title;
+                        
+                        const newContainer = doc.querySelector('.page');
+                        if (newContainer) {
+                            container.className = isForward ? 'page-slide-left' : 'page-slide-right';
+                            container.innerHTML = newContainer.innerHTML;
+                        }
+                        
+                        document.querySelectorAll('.mobile-bottom-nav .mobile-nav-link').forEach(l => l.classList.remove('active'));
+                        
+                        history.pushState({ page: targetPage }, doc.title, targetPage);
+                        
+                        setTimeout(() => {
+                            container.style.opacity = '';
+                            container.style.pointerEvents = '';
+                            container.classList.remove('page-slide-left', 'page-slide-right');
+                            isTransitioning = false;
+                            window.scrollTo(0, 0);
+                        }, 300);
+                    } catch (error) {
+                        window.location.href = targetPage;
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        @keyframes slideLeft { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideRight { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .page-slide-left { animation: slideLeft 0.3s ease-out; }
+        .page-slide-right { animation: slideRight 0.3s ease-out; }
     </style>
 </body>
 </html>

@@ -501,11 +501,40 @@
 
     <!-- 移动端底部 Tab 栏 -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 grid grid-cols-4 h-10" role="navigation" aria-label="移动端导航">
-        <a href="index.html" class="flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm">首页</a>
-        <a href="naver.html" class="flex items-center justify-center text-primary-600 dark:text-primary-400 font-semibold text-sm" aria-current="page">导航</a>
-        <a href="qiantai.html" class="flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm">前台</a>
-        <a href="about.html" class="flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm">搬砖</a>
+        <a href="index.html" class="mobile-nav-link flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm" data-page="index.html" data-page="index.html">首页</a>
+        <a href="naver.html" class="mobile-nav-link flex items-center justify-center text-primary-600 dark:text-primary-400 font-semibold text-sm" data-page="naver.html" aria-current="page" data-page="naver.html">导航</a>
+        <a href="qiantai.html" class="mobile-nav-link flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm" data-page="qiantai.html" data-page="qiantai.html">前台</a>
+        <a href="about.html" class="mobile-nav-link flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-semibold text-sm" data-page="about.html" data-page="about.html">搬砖</a>
     </nav>
+
+    <!-- 页面切换滑动动画样式 -->
+    <style>
+        .page-transition-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .page-slide-left {
+            animation: slideLeft 0.3s ease-out;
+        }
+        .page-slide-right {
+            animation: slideRight 0.3s ease-out;
+        }
+        @keyframes slideLeft {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideRight {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .page-fade-in {
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 
     <!-- 右下角控制按钮组 -->
     <div class="fixed bottom-32 md:bottom-24 right-4 md:right-6 z-[100] flex flex-col space-y-3" role="toolbar" aria-label="页面控制">
@@ -951,6 +980,121 @@
                 }
             };
 
+            // ===== 移动端页面切换管理器 =====
+            const PageSwitcher = {
+                isTransitioning: false,
+                currentPage: 'naver.html',
+                pages: ['index.html', 'naver.html', 'qiantai.html', 'about.html'],
+
+                init() {
+                    this.currentPage = window.location.pathname.split('/').pop() || 'naver.html';
+                    
+                    // 拦截移动端导航点击
+                    DOM.$$('.mobile-nav-link').forEach(link => {
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const targetPage = link.dataset.page;
+                            if (targetPage !== this.currentPage && !this.isTransitioning) {
+                                this.switchPage(targetPage, link);
+                            }
+                        });
+                    });
+
+                    // 处理浏览器前进/后退
+                    window.addEventListener('popstate', () => {
+                        const page = window.location.pathname.split('/').pop() || 'naver.html';
+                        if (page !== this.currentPage && !this.isTransitioning) {
+                            this.switchPage(page, null, false);
+                        }
+                    });
+                },
+
+                async switchPage(targetPage, clickedLink, pushState = true) {
+                    this.isTransitioning = true;
+                    const mainContent = DOM.$('#main-content');
+                    const header = DOM.$('header.md\\:hidden');
+                    
+                    // 判断滑动方向
+                    const currentIndex = this.pages.indexOf(this.currentPage);
+                    const targetIndex = this.pages.indexOf(targetPage);
+                    const isForward = targetIndex > currentIndex;
+                    
+                    // 显示加载状态
+                    if (mainContent) {
+                        mainContent.style.opacity = '0.5';
+                        mainContent.style.pointerEvents = 'none';
+                    }
+
+                    try {
+                        // 获取目标页面内容
+                        const response = await fetch(targetPage);
+                        const html = await response.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        
+                        // 提取目标页面的主内容和标题
+                        const newTitle = doc.title;
+                        const newContent = doc.querySelector('#main-content');
+                        const newMobileHeader = doc.querySelector('header.md\\:hidden');
+                        
+                        // 更新标题
+                        if (newTitle) document.title = newTitle;
+                        
+                        // 更新移动端顶部导航（如果有）
+                        if (header && newMobileHeader) {
+                            header.outerHTML = newMobileHeader.outerHTML;
+                        }
+                        
+                        // 添加滑动动画类
+                        const slideClass = isForward ? 'page-slide-left' : 'page-slide-right';
+                        if (mainContent && newContent) {
+                            mainContent.className = mainContent.className.replace(/page-slide-\w+/g, '');
+                            mainContent.classList.add(slideClass);
+                            mainContent.innerHTML = newContent.innerHTML;
+                        }
+                        
+                        // 更新底部导航高亮
+                        this.updateNavHighlight(targetPage);
+                        
+                        // 更新 URL
+                        if (pushState) {
+                            history.pushState({ page: targetPage }, newTitle, targetPage);
+                        }
+                        
+                        this.currentPage = targetPage;
+                        
+                        // 动画结束后清理
+                        setTimeout(() => {
+                            if (mainContent) {
+                                mainContent.classList.remove(slideClass);
+                                mainContent.style.opacity = '';
+                                mainContent.style.pointerEvents = '';
+                            }
+                            this.isTransitioning = false;
+                            // 滚动到顶部
+                            window.scrollTo(0, 0);
+                        }, 300);
+                        
+                    } catch (error) {
+                        console.error('页面切换失败:', error);
+                        // 失败时回退到传统跳转
+                        window.location.href = targetPage;
+                    }
+                },
+
+                updateNavHighlight(targetPage) {
+                    const navLinks = DOM.$$('.mobile-nav-link');
+                    navLinks.forEach(link => {
+                        const isActive = link.dataset.page === targetPage;
+                        link.classList.toggle('text-primary-600', isActive);
+                        link.classList.toggle('dark:text-primary-400', isActive);
+                        link.classList.toggle('text-slate-500', !isActive);
+                        link.classList.toggle('dark:text-slate-400', !isActive);
+                        link.toggleAttribute('aria-current', isActive ? 'page' : null);
+                    });
+                }
+            };
+
             // ===== 公共工具函数 =====
             const Utils = {
                 scrollToTop() {
@@ -963,6 +1107,7 @@
                 DarkModeManager.init();
                 ScrollManager.init();
                 SearchManager.init();
+                PageSwitcher.init();
             };
 
             // 公开API
