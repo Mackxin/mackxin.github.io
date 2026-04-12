@@ -60,11 +60,9 @@
         .nav-active {
             color: #ff1d55 !important;
             font-weight: 700 !important;
-            border-bottom: 2px solid #ff1d55 !important;
         }
         .dark .nav-active {
             color: #ff4d74 !important;
-            border-bottom-color: #ff4d74 !important;
         }
         
         /* ===== 通用样式 ===== */
@@ -250,7 +248,7 @@
         }
         .mobile-search-input {
             width: 100%;
-            padding: 0.5rem 2rem 0.5rem 2rem;
+            padding: 0.5rem 2.5rem 0.5rem 2.5rem;
             background-color: #f1f5f9;
             border: 1px solid #e2e8f0;
             border-radius: 0.5rem;
@@ -288,15 +286,16 @@
         }
         .mobile-search-clear {
             position: absolute;
-            inset: 0;
-            top: 0;
-            bottom: 0;
-            right: 0;
+            top: 0; bottom: 0; right: 0;
             display: none;
             align-items: center;
-            padding-right: 0.5rem;
+            justify-content: center;
+            width: 2.5rem;
             color: #94a3b8;
             transition: color 150ms;
+        }
+        .mobile-search-clear.show {
+            display: flex;
         }
         .mobile-search-clear:hover {
             color: #475569;
@@ -312,10 +311,10 @@
         /* ===== 分类区块 ===== */
         .category-section {
             margin-bottom: 1.5rem;
-            scroll-margin-top: 8rem;
+            scroll-margin-top: 10rem; /* 增加偏移量，防止被 header 遮挡 */
         }
         @media (min-width: 768px) {
-            .category-section { scroll-margin-top: 12rem; }
+            .category-section { scroll-margin-top: 14rem; }
         }
         .category-section {
             animation: slideUp 0.4s ease-out backwards;
@@ -1331,52 +1330,91 @@
 
             // ===== 滚动监听和导航高亮 =====
             const ScrollManager = {
-                observer: null,
+                backToTopBtn: null,
+                sections: [],
+                navLinks: [],
+                headerHeight: 100, // 顶部导航栏高度
 
                 init() {
-                    this.setupIntersectionObserver();
-                    this.setupScrollHandler();
+                    this.backToTopBtn = DOM.$('#back-to-top');
+                    this.sections = Array.from(DOM.$$('section[id^="section-"]'));
+                    this.navLinks = Array.from(DOM.$$('.desktop-nav-link'));
+                    
+                    // 绑定锚点点击事件，实现精准跳转
+                    this.bindAnchorClicks();
+                    
+                    this.setupScrollSpy();
+                    this.setupBackToTopVisibility();
                 },
 
-                setupIntersectionObserver() {
-                    const sections = Array.from(DOM.$$('section[id^="section-"]'));
-                    if (!sections.length) return;
+                bindAnchorClicks() {
+                    // 拦截所有分类导航链接的点击事件
+                    const allNavLinks = [
+                        ...DOM.$$('.desktop-nav-link'),
+                        ...DOM.$$('.mobile-menu-item')
+                    ].filter(Boolean);
 
-                    this.observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const id = entry.target.id;
-                                this.updateActiveNav(id);
+                    allNavLinks.forEach(link => {
+                        link.addEventListener('click', (e) => {
+                            const targetId = link.getAttribute('href');
+                            if (targetId && targetId.startsWith('#section-')) {
+                                e.preventDefault();
+                                const targetSection = DOM.$(targetId);
+                                if (targetSection) {
+                                    // 动态获取顶部导航栏的高度，确保滚动位置准确
+                                    const headerEl = window.innerWidth >= 768 ? DOM.$('.desktop-nav') : DOM.$('.mobile-header');
+                                    const headerOffset = headerEl ? headerEl.offsetHeight : 80;
+                                    
+                                    // 计算目标位置：元素绝对位置 - 导航栏高度 - 少量额外间距
+                                    const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset - 20;
+                                    
+                                    window.scrollTo({
+                                        top: targetPosition,
+                                        behavior: 'smooth'
+                                    });
+                                }
                             }
                         });
-                    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-
-                    sections.forEach(section => this.observer.observe(section));
-                },
-
-                updateActiveNav(activeId) {
-                    if (state.activeSection === activeId) return;
-                    state.activeSection = activeId;
-
-                    DOM.$$('.desktop-nav-link').forEach(link => {
-                        const isActive = link.dataset.id === activeId;
-                        link.classList.toggle('nav-active', isActive);
                     });
                 },
 
-                setupScrollHandler() {
-                    const btn = DOM.$('#back-to-top');
-                    if (!btn) return;
+                setupScrollSpy() {
+                    const updateActive = () => {
+                        const scrollY = window.scrollY + this.headerHeight;
+                        let currentId = '';
 
+                        // 从下往上找，找到最后一个偏移量小于当前滚动位置的分类
+                        for (let i = this.sections.length - 1; i >= 0; i--) {
+                            if (this.sections[i].offsetTop <= scrollY) {
+                                currentId = this.sections[i].id;
+                                break;
+                            }
+                        }
+
+                        // 更新高亮
+                        this.navLinks.forEach(link => {
+                            link.classList.remove('nav-active');
+                            if (currentId && link.getAttribute('href') === `#${currentId}`) {
+                                link.classList.add('nav-active');
+                            }
+                        });
+                    };
+
+                    window.addEventListener('scroll', updateActive, { passive: true });
+                    updateActive(); // 初始化执行一次
+                },
+
+                setupBackToTopVisibility() {
+                    if (!this.backToTopBtn) return;
                     window.addEventListener('scroll', () => {
                         if (window.scrollY > 300) {
-                            btn.style.opacity = '1';
-                            btn.style.pointerEvents = 'auto';
-                            btn.style.visibility = 'visible';
+                            this.backToTopBtn.style.opacity = '1';
+                            this.backToTopBtn.style.pointerEvents = 'auto';
+                            this.backToTopBtn.style.visibility = 'visible';
                         } else {
-                            btn.style.opacity = '0';
-                            btn.style.pointerEvents = 'none';
-                            btn.style.visibility = 'hidden';
+                            this.backToTopBtn.style.opacity = '0';
+                            this.backToTopBtn.style.pointerEvents = 'none';
+                            this.backToTopBtn.style.visibility = 'hidden';
                         }
                     }, { passive: true });
                 }
@@ -1389,7 +1427,8 @@
                 inputs: [],
 
                 init() {
-                    this.inputs = Array.from(DOM.$$('.search-input'));
+                    // 修复：同时选取桌面端和移动端的搜索框
+                    this.inputs = Array.from(DOM.$$('.search-input, .mobile-search-input'));
                     this.clearBtn = DOM.$('#clear-search');
                     if (!this.inputs.length) return;
 
@@ -1437,9 +1476,18 @@
                 },
 
                 updateClearBtn() {
-                    if (!this.clearBtn) return;
-                    const hasValue = DOM.$('#search-input').value.length > 0;
-                    this.clearBtn.classList.toggle('hidden', !hasValue);
+                    const clearBtns = [this.clearBtn, DOM.$('#clear-search-mobile')].filter(Boolean);
+                    const visibleInput = this.inputs.find(i => i.offsetParent !== null) || this.inputs[0];
+                    const hasValue = visibleInput && visibleInput.value.length > 0;
+                    clearBtns.forEach(btn => {
+                        if (hasValue) {
+                            btn.classList.add('show');
+                            btn.classList.remove('hidden');
+                        } else {
+                            btn.classList.remove('show');
+                            btn.classList.add('hidden');
+                        }
+                    });
                 },
 
                 clearSearch() {
@@ -1450,13 +1498,6 @@
                     this.performSearch('');
                     const visibleInput = this.inputs.find(i => i.offsetParent !== null) || this.inputs[0];
                     if (visibleInput) visibleInput.focus();
-                },
-
-                updateClearBtn() {
-                    const clearBtns = [this.clearBtn, DOM.$('#clear-search-mobile')].filter(Boolean);
-                    const visibleInput = this.inputs.find(i => i.offsetParent !== null) || this.inputs[0];
-                    const hasValue = visibleInput && visibleInput.value.length > 0;
-                    clearBtns.forEach(btn => btn.classList.toggle('hidden', !hasValue));
                 },
 
                 performSearch(keyword) {
@@ -1520,18 +1561,42 @@
                 },
 
                 highlightText(element, keyword) {
-                    if (!keyword) return;
-                    const text = element.textContent;
-                    const regex = new RegExp(`(${this.escapeRegex(keyword)})`, 'gi');
-                    if (regex.test(text)) {
-                        element.innerHTML = text.replace(regex, '<mark class="bg-primary-200 dark:bg-primary-800 text-primary-900 dark:text-primary-100 px-0.5 rounded">$1</mark>');
+                    if (!keyword || !element) return;
+                    // 只处理文本节点，不破坏 HTML 结构
+                    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+                    const textNodes = [];
+                    let node;
+                    while (node = walker.nextNode()) {
+                        textNodes.push(node);
                     }
+                    
+                    textNodes.forEach(textNode => {
+                        const text = textNode.textContent;
+                        const regex = new RegExp(`(${this.escapeRegex(keyword)})`, 'gi');
+                        if (regex.test(text)) {
+                            const span = document.createElement('span');
+                            span.innerHTML = text.replace(regex, '<mark class="bg-primary-200 dark:bg-primary-800 text-primary-900 dark:text-primary-100 px-0.5 rounded">$1</mark>');
+                            textNode.parentNode.replaceChild(span, textNode);
+                        }
+                    });
                 },
 
                 removeHighlight(element) {
-                    if (element.querySelector('mark')) {
-                        element.innerHTML = element.textContent;
-                    }
+                    if (!element) return;
+                    // 移除所有 mark 标签，保留原文本
+                    const marks = element.querySelectorAll('mark');
+                    marks.forEach(mark => {
+                        const text = document.createTextNode(mark.textContent);
+                        mark.parentNode.replaceChild(text, mark);
+                    });
+                    // 移除包裹文本的 span
+                    const spans = element.querySelectorAll('span');
+                    spans.forEach(span => {
+                        if (span.children.length === 0) {
+                            const text = document.createTextNode(span.textContent);
+                            span.parentNode.replaceChild(text, span);
+                        }
+                    });
                 },
 
                 escapeRegex(string) {
